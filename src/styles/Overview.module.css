@@ -1,0 +1,42 @@
+.container {
+	flex: 1 0 30rem;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+
+}
+
+.innerContainer {
+	display: flex;
+	flex-flow: row;
+	width: 80%;
+	margin: 1rem 0 0 0;
+	border-radius: 10px;
+}
+
+.entriesList {
+	flex: 2;
+	display:flex;
+}
+
+.entryPopup {
+	position: absolute;
+	left: 0%;
+	top: 50%;
+	visibility: visible;
+	opacity: 0;
+	transform-origin: top center;
+	transform: 
+	rotateX(0deg)
+	translate(50%, -50%);
+	z-index: 100;
+	transition: opacity 200ms ease 500ms
+}
+
+/* .entryList:hover .child {
+	visibility: visible;
+	opacity: 1;
+	transform: 
+	rotateX(0)
+	translate(-50%, -100%);
+} */

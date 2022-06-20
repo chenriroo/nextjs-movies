@@ -1,0 +1,25 @@
+.containerContent {
+	display: flex;
+	justify-content: center;
+	padding-top: 20rem;
+	border-radius: 0 0 20px 20px;
+}
+
+.contentWrap {
+	width: 950px;
+	display: flex;
+	flex-flow: column;
+}
+
+.features {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	flex-flow: row wrap;
+}
+
+#hero {
+	padding: 3rem 0 3rem 0;
+}
+

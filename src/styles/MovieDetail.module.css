@@ -1,0 +1,10 @@
+.movieDetail {
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	transform: translate(0, 25px);
+	list-style: none;
+}
+

@@ -1,0 +1,44 @@
+.container {
+	display: flex;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all ease 200ms;
+}
+
+
+.rating { transition: transform ease 200ms; }
+.rating:hover { transform: scale(1.1); }
+
+/* Popup */
+
+.closeModal {
+	position: absolute;
+	right: 0;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.popup {
+	position: absolute;
+	display: flex;
+	flex-flow: column;
+	width: 350px;
+	transform: translate(0px, -10px);
+	background-color: rgba(240, 248, 255, 1);
+	color: #031023;
+	border-radius: 4px;
+	top: 0;
+	cursor: default;
+	z-index: 100;
+}
+
+.section {
+	flex: 1 0 100px;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+}

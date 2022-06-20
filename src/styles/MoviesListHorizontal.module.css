@@ -1,0 +1,10 @@
+.listMovies {
+	list-style: none;
+	display: flex;
+	flex-flow: row;
+	justify-content: space-between;
+}
+
+.listMovies > li:last-child {
+	margin: 0;
+}

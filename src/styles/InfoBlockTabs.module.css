@@ -1,0 +1,43 @@
+.infoBlockTabs {
+	position: relative;
+	/* border: 1px solid rgba(0, 255, 179, 0.3); */
+}
+
+.infoBlockTabs header {
+	/* border-bottom: 1px solid #f6bc41; */
+}
+
+.infoBlockTabs header ul {
+	display: flex;
+	text-transform: uppercase;
+	margin-bottom: -1px;
+	color: #d8e0e8;
+}
+
+.infoBlockTabs header ul li { 
+	margin-right: 15px;
+
+}
+
+.infoBlockTabs header ul .selectedTab {
+	color: rgb(255, 255, 255);
+	border-bottom: 2px solid #f6bc41;
+}
+
+.infoBlockTabs header ul .selectedTab:hover {
+	border-bottom: none;
+}
+
+.tabSpan {
+	display: block;
+	cursor: pointer;
+	margin: 0;
+	font-family: 'Rubik';
+	font-size: 18px;
+	font-weight: 500;
+	letter-spacing: 1px;
+}
+
+.tabSpan:hover {
+	border-bottom: 2px solid #f6bc41;
+}

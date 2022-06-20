@@ -1,0 +1,28 @@
+.containerMoviesLine {
+	display: flex;
+	flex-flow: column;
+}
+
+.column {
+	flex-flow: column;
+}
+
+.row {
+	flex-flow: row;
+}
+
+.containerItem {
+	height: 110px;
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: space-between;
+	flex-flow: row;
+	padding: 10px;
+	background-color: #456;
+	border-radius: 4px;
+}
+
+.MovieInfo {
+	display: flex;
+	flex-flow: column;
+}

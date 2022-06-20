@@ -1,0 +1,13 @@
+.container {
+	flex: 1 0 10rem;
+	display: flex;
+	flex-flow: column;
+	margin-top: 5px;
+	padding: 15px;
+	background-color: rgba(53, 59, 70, 0.2);
+	border-radius: 10px;
+}
+
+.movie {
+	display: flex;
+}

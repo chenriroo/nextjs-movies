@@ -1,0 +1,44 @@
+.infoBlock {
+	display: grid;
+	grid-template-columns: 200px 1fr;
+	grid-template-rows: 1fr auto auto 1fr;
+	grid-gap: 5px;
+}
+
+.infoGenre {
+	grid-column: 2/3
+}
+
+.h1_movieTitle {
+	font-family: 'Source Serif Pro', serif;
+	font-weight: 700;
+}
+
+.h4_filmInfo {
+	font-weight: 400;
+	margin: 0;
+	border-bottom: dotted 1px rgb(75, 88, 100);
+}
+
+.h4_filmInfo > span {
+	position:relative;
+	text-transform: uppercase;
+	background-color: rgb(25 28 36);
+	top: 10px;
+}
+
+.infoBox {
+	display: inline-block;
+	background-color: rgb(40, 48, 56);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+	padding: 3px 6px;
+	margin-right: 4px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 0.8em;
+}
+
+.infoBox:hover {
+	color: #fff;
+	background-color: rgb(48, 57, 66);
+}

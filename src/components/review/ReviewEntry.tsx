@@ -2,7 +2,7 @@ import styles from '../../styles/ReviewEntry.module.css'
 
 const ReviewEntry = ({data}) => {
 
-	console.log('ReviewEntry')
+	//console.log('ReviewEntry')
 
   return (
 	<div className={styles.entry}>

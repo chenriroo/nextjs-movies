@@ -17,7 +17,23 @@ import BackdropImage from '../components/BackdropImage'
 export default function Home() {
 	const {isFetching, movies,error} = useFetchMovies()
 	const [backdropImg, setBackdropImg] = useState([])
-	console.log(movies)
+	//console.log(movies)
+
+
+
+	
+	useEffect(() => {
+		return
+
+		async function bar() {
+			const refCollection = collection(projectFirestore, 'movies');
+			const movies = await getDocs(refCollection)
+			movies.docs.forEach((movie) => {
+				console.log(movie.id)
+			})
+		}
+		bar()
+	},[])
 	
 	useEffect(() => {
 		const getImg = async () => {

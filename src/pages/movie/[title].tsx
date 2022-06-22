@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 
 import InfoBlockTabs from "../../components/InfoBlockTabs"
 import useFetchMovie from "../../hooks/useFetchMovie"
+import useFetchMovies from "../../hooks/useFetchMovies"
 import useFetchReviews from "../../hooks/useFetchReviews"
 import { useRouter } from "next/router"
 import Image from "next/image"
@@ -22,7 +23,10 @@ import Rating from "../../components/review/Rating"
 
 import SingleLine from "../../components/lists/SingleLine"
 
-const Movie = () => {
+import { projectFirestore } from "../../firebase/clientApp"
+import { collection, getDocs } from "firebase/firestore"
+
+const Movie = ({ fooData }) => {
 	const router = useRouter()
 	const { isFetching, movie, error } = useFetchMovie(router.query.title);
 	const { 
@@ -35,11 +39,13 @@ const Movie = () => {
 
 	//console.log(movie)
 
+	console.log(fooData)
+
 	const tabClick = e => {
 		setActiveTab(e.target.dataset.tab)
 	}
 
-  return (
+	return (
 	<>
 		<Head>
 			<title>Movie</title>
@@ -114,9 +120,30 @@ const Movie = () => {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticPaths() {
+	let paths;
+
+	const refCollection = collection(projectFirestore, 'movies');
+	const movies = await getDocs(refCollection);
+
+	paths = movies.docs.map((movie) => {
+		return {
+			params: { title: movie.id }
+		}
+	})
+
 	return {
-		props: {}
+		paths,
+		fallback: false // false or 'blocking'
+	};
+  }
+  
+
+export async function getStaticProps() {
+	const fooData = 'test - getStaticProps'
+
+	return {
+		props: { fooData }
 	}
 }
 

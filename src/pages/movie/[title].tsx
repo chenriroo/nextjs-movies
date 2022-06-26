@@ -3,14 +3,11 @@ import TopMenu from "../../components/TopMenu"
 import styles from "../../styles/Movie.module.css"
 import { useState, useEffect } from "react"
 
-import InfoBlockTabs from "../../components/InfoBlockTabs"
-import useFetchMovie from "../../hooks/useFetchMovie"
-import useFetchMovies from "../../hooks/useFetchMovies"
-import useFetchReviews from "../../hooks/useFetchReviews"
 import { useRouter } from "next/router"
 import Image from "next/image"
 
 import BackdropImage from "../../components/BackdropImage"
+import InfoBlockTabs from "../../components/InfoBlockTabs"
 import MainMovie from "../../components/movie/MainMovie"
 import MainCrew from "../../components/movie/MainCrew"
 import MainVotes from "../../components/movie/MainVotes"
@@ -20,26 +17,23 @@ import SecondaryMovie from "../../components/movie/SecondaryMovie"
 import ReviewSection from "../../components/review/ReviewSection"
 import ReviewCreate from "../../components/review/ReviewCreate"
 import Rating from "../../components/review/Rating"
-
 import SingleLine from "../../components/lists/SingleLine"
 
+import useFetchMovies from "../../hooks/useFetchMovies"
+import useFetchReviews from "../../hooks/useFetchReviews"
 import { projectFirestore } from "../../firebase/clientApp"
-import { collection, getDocs } from "firebase/firestore"
+import { doc, getDoc, collection, getDocs } from "firebase/firestore"
 
-const Movie = ({ fooData }) => {
+const Movie = ({ movieData, movieID}) => {
 	const router = useRouter()
-	const { isFetching, movie, error } = useFetchMovie(router.query.title);
 	const { 
 		isFetching: reviewIsFetching,
 		error:reviewError, reviews } = useFetchReviews(router.query.title);
 	const [activeTab, setActiveTab] = useState('info')
-
 	const [isLoggedIn, setLoggedIn] = useState(true) // temporary
 
+	console.log(movieID)
 
-	//console.log(movie)
-
-	console.log(fooData)
 
 	const tabClick = e => {
 		setActiveTab(e.target.dataset.tab)
@@ -56,17 +50,17 @@ const Movie = ({ fooData }) => {
 		<TopMenu />
 		
 		<BackdropImage 
-		title={movie.title} img={movie.imgBackground} imgBlur={movie.imgBackgroundBlur}/>
+		title={movieData.title} img={movieData.imgBackground} imgBlur={movieData.imgBackgroundBlur}/>
 
 			<div className={styles.containerContent}>
 
 				<div className={styles.contentWrap}>
 
-					{movie.imgPoster && 
+					{movieData.imgPoster && 
 					  <div className={styles.imgPosterContainer}>
 						  <Image
-							  src={movie.imgPoster}
-							  alt={movie.title}
+							  src={movieData.imgPoster}
+							  alt={movieData.title}
 							  className={styles.imgPoster}
 							  layout='fixed'
 							  width={240}
@@ -78,9 +72,9 @@ const Movie = ({ fooData }) => {
 					<div className={styles.containerFirstContent}>
 					  
 						<div className={styles.firstContent}>
-							<h1 className={styles.h1_movieTitle}>{movie.title}</h1>
+							<h1 className={styles.h1_movieTitle}>{movieData.title}</h1>
 							
-							<SecondaryMovie movie={movie} />
+							<SecondaryMovie movie={movieData} />
 						</div>
 					</div>
 
@@ -99,10 +93,10 @@ const Movie = ({ fooData }) => {
 				  	<div className={styles.containerSecondaryContent}>
 					  <InfoBlockTabs setActiveTab={tabClick} activeTab={activeTab} />
 							{{
-								info: <MainMovie movie={movie} />,
-								crew: <MainCrew cast={movie.cast} />,
-								votes: <MainVotes movie={movie} />,
-								statistics: <MainStatistics movie={movie} />
+								info: <MainMovie movie={movieData} />,
+								crew: <MainCrew cast={movieData.cast} />,
+								votes: <MainVotes movie={movieData} />,
+								statistics: <MainStatistics movie={movieData} />
 							}[activeTab]}
 					</div>
 
@@ -134,16 +128,32 @@ export async function getStaticPaths() {
 
 	return {
 		paths,
-		fallback: false // false or 'blocking'
+		fallback: 'blocking' // false or 'blocking'
 	};
   }
-  
 
-export async function getStaticProps() {
-	const fooData = 'test - getStaticProps'
+export async function getStaticProps(context) {
+	const movieID = context.params.title;
+	const docRef = doc(projectFirestore, "movies", movieID);
+	const movie = await getDoc(docRef);
+	const obj = movie.data();
+
+	const movieData = {
+		title: obj.title,
+		tagline: obj.tagline,
+		description: obj.description,
+		year: obj.year,
+		genre: obj.genre,
+		cast: '',
+		rating: obj.genre,
+		imgPoster: obj.imgPoster,
+		imgBackground: obj.imgBackground,
+		imgBackgroundBlur: obj.imgBackgroundBlur
+	}
 
 	return {
-		props: { fooData }
+		props: { movieData, movieID },
+		revalidate: 10,
 	}
 }
 

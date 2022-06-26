@@ -21,7 +21,7 @@ const useFetchMovie = (inputMovieID) => {
 	useEffect(() => {
 		if(!inputMovieID) return
 		setFetching(true)
-
+		
 		console.log('useFetchMovie')
 
 		const fetchMovie = async () => {

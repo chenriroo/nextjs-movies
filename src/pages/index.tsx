@@ -2,38 +2,22 @@ import Head from 'next/head'
 import Image from 'next/image'
 import TopMenu from '../components/TopMenu'
 import Hero from '../components/Hero'
-import { projectFirestore, projectStorage } from '../firebase/clientApp'
-import { getDownloadURL, ref } from 'firebase/storage'
-import { collection, getDocs } from 'firebase/firestore'
+
 import Overview from '../components/Overview'
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
-import useFetchMovies from '../hooks/useFetchMovies'
 import Feature from '../components/Feature'
 import MoviesListHorizontal from '../components/MoviesListHorizontal'
 import BackdropImage from '../components/BackdropImage'
 
 
-export default function Home() {
-	const {isFetching, movies,error} = useFetchMovies()
+import { projectFirestore, projectStorage } from '../firebase/clientApp'
+import { getDownloadURL, ref } from 'firebase/storage'
+import { collection, getDocs } from 'firebase/firestore'
+
+export default function Home({ movies }) {
 	const [backdropImg, setBackdropImg] = useState([])
-	//console.log(movies)
 
-
-
-	
-	useEffect(() => {
-		return
-
-		async function bar() {
-			const refCollection = collection(projectFirestore, 'movies');
-			const movies = await getDocs(refCollection)
-			movies.docs.forEach((movie) => {
-				console.log(movie.id)
-			})
-		}
-		bar()
-	},[])
 	
 	useEffect(() => {
 		const getImg = async () => {
@@ -104,3 +88,23 @@ export default function Home() {
 
   )
 }
+
+
+export async function getStaticProps() {
+	const refCollection = collection(projectFirestore, 'movies');
+	const data = await getDocs(refCollection);
+
+	const movies = data.docs.map((movie) => {
+		return {
+			...movie.data(),
+			id: movie.id
+		}
+	}) 
+
+
+	return {
+		props: { movies },
+		revalidate: 10,
+	}
+}
+

@@ -15,6 +15,7 @@ import { projectFirestore, projectStorage } from '../lib/firebaseClient'
 import { getDownloadURL, ref } from 'firebase/storage'
 import { collection, getDocs } from 'firebase/firestore'
 
+import { db } from "../lib/firebaseAdmin"
 import useSWR from 'swr'
 import { Suspense } from 'react'
 
@@ -88,15 +89,20 @@ export default function Home({ movies }) {
 
 
 export async function getStaticProps() {
-	const refCollection = collection(projectFirestore, 'movies');
-	const data = await getDocs(refCollection);
+	let movies = []
+	const data = await db.collection('movies').get()
 
-	const movies = data.docs.map((movie) => {
-		return {
-			...movie.data(),
-			id: movie.id
-		}
-	}) 
+
+	data.forEach((doc) => {
+		movies.push({ id: doc.id, ...doc.data() })
+	})
+
+	// const movies = data.docs.map((movie) => {
+	// 	return {
+	// 		...movie.data(),
+	// 		id: movie.id
+	// 	}
+	// }) 
 
 	return {
 		props: { movies },

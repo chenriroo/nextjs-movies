@@ -23,6 +23,7 @@ import useFetchMovies from "../../hooks/useFetchMovies"
 import useFetchReviews from "../../hooks/useFetchReviews"
 import { projectFirestore } from "../../lib/firebaseClient"
 import { doc, getDoc, collection, getDocs } from "firebase/firestore"
+import { db } from "../../lib/firebaseAdmin"
 
 const Movie = ({ movieData, movieID}) => {
 	const router = useRouter()
@@ -132,8 +133,9 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
 	const movieID = context.params.title;
-	const docRef = doc(projectFirestore, "movies", movieID);
-	const movie = await getDoc(docRef);
+	const movie = await db.collection('movies').doc(movieID).get()
+
+	
 	const obj = movie.data();
 
 	const movieData = {

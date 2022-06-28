@@ -1,4 +1,4 @@
-import { projectFirestore } from '../firebase/clientApp';
+import { projectFirestore } from '../lib/firebaseClient';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useReducer, useState, useEffect } from 'react'
 

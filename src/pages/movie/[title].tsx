@@ -21,7 +21,7 @@ import SingleLine from "../../components/lists/SingleLine"
 
 import useFetchMovies from "../../hooks/useFetchMovies"
 import useFetchReviews from "../../hooks/useFetchReviews"
-import { projectFirestore } from "../../firebase/clientApp"
+import { projectFirestore } from "../../lib/firebaseClient"
 import { doc, getDoc, collection, getDocs } from "firebase/firestore"
 
 const Movie = ({ movieData, movieID}) => {
@@ -57,23 +57,21 @@ const Movie = ({ movieData, movieID}) => {
 				<div className={styles.contentWrap}>
 
 					{movieData.imgPoster && 
-					  <div className={styles.imgPosterContainer}>
-						  <Image
-							  src={movieData.imgPoster}
-							  alt={movieData.title}
-							  className={styles.imgPoster}
-							  layout='fixed'
-							  width={240}
-							  height={350}
-						  />
-						  <span className={styles.imgPosterOverlay}></span>
-					  </div> }
+						<div className={styles.imgPosterContainer}>
+							<Image
+								src={movieData.imgPoster}
+								alt={movieData.title}
+								className={styles.imgPoster}
+								layout='fixed'
+								width={240}
+								height={350}
+							/>
+							<span className={styles.imgPosterOverlay}></span>
+						</div> }
 					
 					<div className={styles.containerFirstContent}>
-					  
 						<div className={styles.firstContent}>
 							<h1 className={styles.h1_movieTitle}>{movieData.title}</h1>
-							
 							<SecondaryMovie movie={movieData} />
 						</div>
 					</div>
@@ -83,7 +81,7 @@ const Movie = ({ movieData, movieID}) => {
 					</div>
 
 					<div className={styles.containerNews}>
-						<SingleLine data={['asd','1','2','3',4]} type='news'/>
+						<SingleLine data={['asd','1','2','3','4']} type='news'/>
 					</div>
 
 					<div className={styles.containerRelated}>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { projectFirestore } from "../firebase/clientApp";
+import { projectFirestore } from "../lib/firebaseClient";
 import { doc, getDoc } from "firebase/firestore";
 
 const useFetchMovie = (inputMovieID) => {

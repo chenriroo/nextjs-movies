@@ -1,7 +1,7 @@
 import styles from '../../styles/admin/Admin.module.css'
 import Head from 'next/head'
 import { collection, getDocs } from 'firebase/firestore'
-import { projectFirestore, projectStorage } from '../../firebase/clientApp'
+import { projectFirestore, projectStorage } from '../../lib/firebaseClient'
 import { useEffect, useState } from 'react'
 import Entries from '../../components/admin/Entries'
 import CreateMovie from '../../components/admin/CreateMovie'

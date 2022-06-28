@@ -11,13 +11,15 @@ import MoviesListHorizontal from '../components/MoviesListHorizontal'
 import BackdropImage from '../components/BackdropImage'
 
 
-import { projectFirestore, projectStorage } from '../firebase/clientApp'
+import { projectFirestore, projectStorage } from '../lib/firebaseClient'
 import { getDownloadURL, ref } from 'firebase/storage'
 import { collection, getDocs } from 'firebase/firestore'
 
+import useSWR from 'swr'
+import { Suspense } from 'react'
+
 export default function Home({ movies }) {
 	const [backdropImg, setBackdropImg] = useState([])
-
 	
 	useEffect(() => {
 		const getImg = async () => {
@@ -31,8 +33,6 @@ export default function Home({ movies }) {
 
 		console.log('useEffect: backdropimage')
 	},[])
-
-
 
 	return (
 		<>
@@ -83,9 +83,6 @@ export default function Home({ movies }) {
 		</div>
 
 		</>
-
-
-
   )
 }
 
@@ -100,7 +97,6 @@ export async function getStaticProps() {
 			id: movie.id
 		}
 	}) 
-
 
 	return {
 		props: { movies },

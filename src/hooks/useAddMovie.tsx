@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { projectStorage, projectFirestore } from "../firebase/clientApp";
+import { projectStorage, projectFirestore } from "../lib/firebaseClient";
 import { doc, setDoc } from 'firebase/firestore'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import FileUploader from "../components/admin/InputFile";

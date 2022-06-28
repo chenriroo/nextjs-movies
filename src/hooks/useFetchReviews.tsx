@@ -1,4 +1,4 @@
-import { projectFirestore } from "../firebase/clientApp";
+import { projectFirestore } from "../lib/firebaseClient";
 import { collection, getDocs, query, where } from "firebase/firestore"
 import { useEffect, useState } from "react"
 
@@ -23,7 +23,6 @@ const useFetchReviews = (inputMovieID) => {
 		setFetching(false);
 
 	},[inputMovieID])
-
 
 	return { isFetching, error, reviews }
 }

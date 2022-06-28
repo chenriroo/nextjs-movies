@@ -4,12 +4,16 @@ import { useState, useEffect } from "react"
 import TopMenu from "../../components/TopMenu"
 import MoviesFilter from "../../components/MoviesFilter"
 import MoviesGrid from "../../components/MoviesGrid"
-import useFetchMovies from "../../hooks/useFetchMovies"
+import useSWR from "swr"
+
+
 
 
 const Movies = () => {
-	const {isFetching, movies, error} = useFetchMovies()
 	const [displayCovers, setDisplayCover] = useState(true)
+	const { data, error } = useSWR('')
+
+	const movies = []
 
 	console.log('test')
 

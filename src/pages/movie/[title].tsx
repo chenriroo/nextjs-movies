@@ -115,9 +115,7 @@ const Movie = ({ movieData, movieID}) => {
 
 export async function getStaticPaths() {
 	let paths;
-
-	const refCollection = collection(projectFirestore, 'movies');
-	const movies = await getDocs(refCollection);
+	const movies = await db.collection('movies').get()
 
 	paths = movies.docs.map((movie) => {
 		return {
@@ -135,7 +133,6 @@ export async function getStaticProps(context) {
 	const movieID = context.params.title;
 	const movie = await db.collection('movies').doc(movieID).get()
 
-	
 	const obj = movie.data();
 
 	const movieData = {

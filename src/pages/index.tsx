@@ -92,17 +92,9 @@ export async function getStaticProps() {
 	let movies = []
 	const data = await db.collection('movies').get()
 
-
 	data.forEach((doc) => {
 		movies.push({ id: doc.id, ...doc.data() })
 	})
-
-	// const movies = data.docs.map((movie) => {
-	// 	return {
-	// 		...movie.data(),
-	// 		id: movie.id
-	// 	}
-	// }) 
 
 	return {
 		props: { movies },

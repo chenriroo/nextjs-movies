@@ -19,11 +19,12 @@ import ReviewCreate from "../../components/review/ReviewCreate"
 import Rating from "../../components/review/Rating"
 import SingleLine from "../../components/lists/SingleLine"
 
-import useFetchMovies from "../../hooks/useFetchMovies"
 import useFetchReviews from "../../hooks/useFetchReviews"
+import { db } from "../../lib/firebaseAdmin"
+
+import useFetchMovies from "../../hooks/useFetchMovies"
 import { projectFirestore } from "../../lib/firebaseClient"
 import { doc, getDoc, collection, getDocs } from "firebase/firestore"
-import { db } from "../../lib/firebaseAdmin"
 
 const Movie = ({ movieData, movieID}) => {
 	const router = useRouter()
@@ -101,8 +102,7 @@ const Movie = ({ movieData, movieID}) => {
 
 					<div className={styles.containerReviews}>
 						<h2 className="h2section">Reviews</h2>
-						{isLoggedIn && <ReviewCreate movie={router.query.title} />}
-						<ReviewSection reviews={reviews}/>
+						<ReviewSection reviews={reviews} isLoggedIn={isLoggedIn}/>
 					</div>
 
 				</div>

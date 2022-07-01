@@ -8,15 +8,13 @@ import useSWR from 'swr'
 
 const fetcher = url => fetch(url).then(r => r.json())
 
-const ReviewSection = ({reviews, isLoggedIn}) => {
-	const url = '/api/review'
+const ReviewSection = ({movieID, reviews, isLoggedIn}) => {
+	const url = `/api/review?movie=${movieID}`
 	const { data, error } = useSWR(url,fetcher)
 	const [type, setType] = useState('reviews');
 	
-	console.log(reviews)
-
 	if(data) {
-		console.log(data.reviews)
+		console.log(data)
 	}
 
 	function handleToggle(e) {

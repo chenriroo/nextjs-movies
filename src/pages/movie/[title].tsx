@@ -102,7 +102,7 @@ const Movie = ({ movieData, movieID}) => {
 
 					<div className={styles.containerReviews}>
 						<h2 className="h2section">Reviews</h2>
-						<ReviewSection reviews={reviews} isLoggedIn={isLoggedIn}/>
+						<ReviewSection movieID={movieID}reviews={reviews} isLoggedIn={isLoggedIn}/>
 					</div>
 
 				</div>

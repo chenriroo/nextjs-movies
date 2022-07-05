@@ -7,12 +7,7 @@ import { useRouter } from "next/router"
 import Image from "next/image"
 
 import BackdropImage from "../../components/BackdropImage"
-import InfoBlockTabs from "../../components/InfoBlockTabs"
-import MainMovie from "../../components/movie/MainMovie"
-import MainCrew from "../../components/movie/MainCrew"
-import MainVotes from "../../components/movie/MainVotes"
-import MainStatistics from "../../components/movie/MainStatistics"
-import SecondaryMovie from "../../components/movie/SecondaryMovie"
+import InfoBlock from "../../components/movie/InfoBlock/InfoBlock"
 
 import ReviewSection from "../../components/review/ReviewSection"
 import ReviewCreate from "../../components/review/ReviewCreate"
@@ -25,6 +20,7 @@ import { db } from "../../lib/firebaseAdmin"
 import useFetchMovies from "../../hooks/useFetchMovies"
 import { projectFirestore } from "../../lib/firebaseClient"
 import { doc, getDoc, collection, getDocs } from "firebase/firestore"
+
 
 const Movie = ({ movieData, movieID}) => {
 	const router = useRouter()
@@ -74,7 +70,8 @@ const Movie = ({ movieData, movieID}) => {
 					<div className={styles.containerFirstContent}>
 						<div className={styles.firstContent}>
 							<h1 className={styles.h1_movieTitle}>{movieData.title}</h1>
-							<SecondaryMovie movie={movieData} />
+							<h4>{movieData.tagline}</h4>
+							<p>{movieData.description}</p>
 						</div>
 					</div>
 
@@ -91,13 +88,14 @@ const Movie = ({ movieData, movieID}) => {
 					</div>
 
 				  	<div className={styles.containerSecondaryContent}>
-					  <InfoBlockTabs setActiveTab={tabClick} activeTab={activeTab} />
+					  {/* <InfoBlockTabs setActiveTab={tabClick} activeTab={activeTab} />
 							{{
 								info: <MainMovie movie={movieData} />,
 								crew: <MainCrew cast={movieData.cast} />,
 								votes: <MainVotes movie={movieData} />,
 								statistics: <MainStatistics movie={movieData} />
-							}[activeTab]}
+							}[activeTab]} */}
+						<InfoBlock movie={movieData} />
 					</div>
 
 					<div className={styles.containerReviews}>

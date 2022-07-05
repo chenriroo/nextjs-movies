@@ -1,11 +1,11 @@
-import styles from '../../styles/Infoblock.module.css'
+import styles from './BlockMovie.module.css'
 
-const MainMovie = ({movie}) => {
+const BlockMovie = ({movie}) => {
 
 
 
-  return (
-	<div className={styles.infoBlock}>
+	return (
+	<div className={styles.containerMovie}>
 		<h4 className={styles.h4_filmInfo}><span>Releasedate</span></h4>
 		<div className={styles.infoGenre}>
 			<span className={styles.infoBox}>placeholder</span>
@@ -16,11 +16,13 @@ const MainMovie = ({movie}) => {
 		</div>
 		  <h4 className={styles.h4_filmInfo}><span>Genres</span></h4>
 		<div className={styles.infoGenre}>
-			{movie.genre.map((genre, i) => (<span key={`genre${i}`} className={styles.infoBox}>{genre}</span>))}
+			{movie.genre.map((genre, i) => (
+			<span key={`genre${i}`} className={styles.infoBox}>{genre}</span>
+			))}
 		</div>
 		
 	</div>
   )
 }
 
-export default MainMovie
+export default BlockMovie

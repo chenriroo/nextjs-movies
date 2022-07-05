@@ -1,18 +1,17 @@
-.infoBlock {
+/* Movie */
+.containerMovie {
 	display: grid;
 	grid-template-columns: 200px 1fr;
 	grid-template-rows: 1fr auto auto 1fr;
 	grid-gap: 5px;
 }
 
+
 .infoGenre {
 	grid-column: 2/3
 }
 
-.h1_movieTitle {
-	font-family: 'Source Serif Pro', serif;
-	font-weight: 700;
-}
+
 
 .h4_filmInfo {
 	font-weight: 400;
@@ -26,6 +25,7 @@
 	background-color: rgb(25 28 36);
 	top: 10px;
 }
+
 
 .infoBox {
 	display: inline-block;
@@ -42,3 +42,4 @@
 	color: #fff;
 	background-color: rgb(48, 57, 66);
 }
+

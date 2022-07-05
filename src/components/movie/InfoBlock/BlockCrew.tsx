@@ -1,7 +1,8 @@
-import styles from '../../styles/MainCrew.module.css'
+import styles from './BlockCrew.module.css'
 
 
-const MainCrew = ({cast}) => {
+
+const BlockCrew = ({cast}) => {
 
   console.log('secondaryCrew:',cast)
 
@@ -25,4 +26,4 @@ const MainCrew = ({cast}) => {
   )
 }
 
-export default MainCrew
+export default BlockCrew

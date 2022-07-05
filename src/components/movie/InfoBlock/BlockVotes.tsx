@@ -1,6 +1,6 @@
-import styles from '../../styles/MainVotes.module.css'
+import styles from './BlockVotes.module.css'
 
-const MainVotes = ({movie}) => {
+const BlockVotes = ({movie}) => {
 	return (
 		<div className={styles.container}>
 			
@@ -20,4 +20,4 @@ const MainVotes = ({movie}) => {
 	)
 }
 
-export default MainVotes
+export default BlockVotes

@@ -120,14 +120,14 @@ const Popup = ({ratings, sortedRatings, avgRating, togglePopup}) => {
 	)
 }
 
-const Rating = ({reviews}) => {
+const Rating = ({reviewData}) => {
 	const [isActive, setActive] = useState(false)
-	let avgRating
+	let avgRating, reviews
 	let ratings = [];
 
-	console.log(reviews)
+
 	// only if review has a rating === type equals 'review'
-	reviews = reviews.filter(rating => rating.type === 'review')
+	reviews = reviewData.reviews.filter(rating => rating.type === 'review')
 
 	
 	if(reviews.length > 0) {
@@ -155,9 +155,8 @@ const Rating = ({reviews}) => {
 			in={isActive}
 			timeout={200}
 			classNames={fadeTransition}
-			unmountOnExit
-			>
-				<Popup
+			unmountOnExit>
+			<Popup
 				ratings={ratings}
 				sortedRatings={sortedRatings}
 				avgRating={avgRating}

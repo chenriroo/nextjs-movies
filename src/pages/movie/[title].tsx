@@ -33,6 +33,8 @@ const Movie = ({ movieData, movieID}) => {
 	const [activeTab, setActiveTab] = useState('info')
 	const [isLoggedIn, setLoggedIn] = useState(true) // temporary
 
+	if(reviewData) console.log(reviewData)
+
 	const tabClick = e => {
 		setActiveTab(e.target.dataset.tab)
 	}
@@ -76,7 +78,7 @@ const Movie = ({ movieData, movieID}) => {
 					</div>
 
 					<div className={styles.containerRating}>
-						{/* <Rating reviews={reviews} /> */}
+						<Rating reviewData={reviewData} />
 					</div>
 
 

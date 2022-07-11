@@ -6,15 +6,15 @@ import ReviewList from './ReviewList'
 import ReviewCreate from './ReviewCreate'
 import useSWR from 'swr'
 
-const fetcher = url => fetch(url).then(r => r.json())
+// const fetcher = url => fetch(url).then(r => r.json())
 
-const ReviewSection = ({movieID, reviews, isLoggedIn}) => {
-	const url = `/api/review?movie=${movieID}`
-	const { data, error } = useSWR(url,fetcher)
+const ReviewSection = ({movieID, reviewData, isLoggedIn}) => {
+	// const url = `/api/review?movie=${movieID}`
+	// const { data, error } = useSWR(url,fetcher)
 	const [type, setType] = useState('reviews');
 	
-	if(data) {
-		console.log(data)
+	if(reviewData) {
+		console.log(reviewData)
 	}
 
 	function handleToggle(e) {
@@ -23,7 +23,7 @@ const ReviewSection = ({movieID, reviews, isLoggedIn}) => {
 	
 	return (
 	<div>
-		<h1>{data ? data.foo : 'hiyaaa'}</h1>
+		<h1>{reviewData ? reviewData.foo : 'hiyaaa'}</h1>
 		{isLoggedIn && <ReviewCreate movie={'...'} />}
 		<div className={styles.toolbar}>
 			<button value='reviews' onClick={handleToggle}>Reviews</button>
@@ -32,7 +32,7 @@ const ReviewSection = ({movieID, reviews, isLoggedIn}) => {
 			<Pagination />
 		</div>
 
-		{data ? <ReviewList reviews={data.reviews} /> : <span>loader hiero</span>}
+		{reviewData ? <ReviewList reviews={reviewData.reviews} /> : <span>loader hiero</span>}
 
 	</div>
   )

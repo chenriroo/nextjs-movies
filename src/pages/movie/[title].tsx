@@ -21,17 +21,17 @@ import useFetchMovies from "../../hooks/useFetchMovies"
 import { projectFirestore } from "../../lib/firebaseClient"
 import { doc, getDoc, collection, getDocs } from "firebase/firestore"
 
+import useSWR from 'swr'
+
+const fetcher = url => fetch(url).then(r => r.json())
 
 const Movie = ({ movieData, movieID}) => {
 	const router = useRouter()
-	const { 
-		isFetching: reviewIsFetching,
-		error:reviewError, reviews } = useFetchReviews(router.query.title);
+	const url = `/api/review?movie=${movieID}`
+	const { data:reviewData, error } = useSWR(url,fetcher)
+
 	const [activeTab, setActiveTab] = useState('info')
 	const [isLoggedIn, setLoggedIn] = useState(true) // temporary
-
-	console.log(movieID)
-
 
 	const tabClick = e => {
 		setActiveTab(e.target.dataset.tab)
@@ -55,17 +55,17 @@ const Movie = ({ movieData, movieID}) => {
 				<div className={styles.contentWrap}>
 
 					{movieData.imgPoster && 
-						<div className={styles.imgPosterContainer}>
-							<Image
-								src={movieData.imgPoster}
-								alt={movieData.title}
-								className={styles.imgPoster}
-								layout='fixed'
-								width={240}
-								height={350}
-							/>
-							<span className={styles.imgPosterOverlay}></span>
-						</div> }
+					<div className={styles.containerPoster}>
+						<Image
+							src={movieData.imgPoster}
+							alt={movieData.title}
+							className={styles.imgPoster}
+							layout='fixed'
+							width={240}
+							height={350}
+						/>
+						<span className={styles.imgPosterOverlay}></span>
+					</div> }
 					
 					<div className={styles.containerFirstContent}>
 						<div className={styles.firstContent}>
@@ -76,31 +76,21 @@ const Movie = ({ movieData, movieID}) => {
 					</div>
 
 					<div className={styles.containerRating}>
-						<Rating reviews={reviews} />
+						{/* <Rating reviews={reviews} /> */}
 					</div>
 
-					<div className={styles.containerNews}>
-						<SingleLine data={['asd','1','2','3','4']} type='news'/>
-					</div>
 
 					<div className={styles.containerRelated}>
 						<SingleLine data={[0,1,2,3]} type='movie'/>
 					</div>
 
 				  	<div className={styles.containerSecondaryContent}>
-					  {/* <InfoBlockTabs setActiveTab={tabClick} activeTab={activeTab} />
-							{{
-								info: <MainMovie movie={movieData} />,
-								crew: <MainCrew cast={movieData.cast} />,
-								votes: <MainVotes movie={movieData} />,
-								statistics: <MainStatistics movie={movieData} />
-							}[activeTab]} */}
 						<InfoBlock movie={movieData} />
 					</div>
 
 					<div className={styles.containerReviews}>
 						<h2 className="h2section">Reviews</h2>
-						<ReviewSection movieID={movieID}reviews={reviews} isLoggedIn={isLoggedIn}/>
+						<ReviewSection movieID={movieID} reviewData={reviewData} isLoggedIn={isLoggedIn}/>
 					</div>
 
 				</div>
@@ -113,7 +103,9 @@ const Movie = ({ movieData, movieID}) => {
 
 export async function getStaticPaths() {
 	let paths;
-	const movies = await db.collection('movies').get()
+
+	const moviesRef = db.collection('movies');
+	const movies = await moviesRef.get()
 
 	paths = movies.docs.map((movie) => {
 		return {
@@ -129,7 +121,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
 	const movieID = context.params.title;
-	const movie = await db.collection('movies').doc(movieID).get()
+	const movieRef = db.collection('movies').doc(movieID)
+	const movie = await movieRef.get()
 
 	const obj = movie.data();
 

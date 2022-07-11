@@ -1,32 +1,21 @@
 import Head from "next/head"
 import TopMenu from "../../components/TopMenu"
 import styles from "../../styles/Movie.module.css"
-import { useState, useEffect } from "react"
-
-import { useRouter } from "next/router"
+import { useState } from "react"
 import Image from "next/image"
 
 import BackdropImage from "../../components/BackdropImage"
 import InfoBlock from "../../components/movie/InfoBlock/InfoBlock"
-
-import ReviewSection from "../../components/review/ReviewSection"
-import ReviewCreate from "../../components/review/ReviewCreate"
 import Rating from "../../components/review/Rating"
+import ReviewSection from "../../components/review/ReviewSection"
 import SingleLine from "../../components/lists/SingleLine"
 
-import useFetchReviews from "../../hooks/useFetchReviews"
 import { db } from "../../lib/firebaseAdmin"
-
-import useFetchMovies from "../../hooks/useFetchMovies"
-import { projectFirestore } from "../../lib/firebaseClient"
-import { doc, getDoc, collection, getDocs } from "firebase/firestore"
-
 import useSWR from 'swr'
 
 const fetcher = url => fetch(url).then(r => r.json())
 
 const Movie = ({ movieData, movieID}) => {
-	const router = useRouter()
 	const url = `/api/review?movie=${movieID}`
 	const { data:reviewData, error } = useSWR(url,fetcher)
 

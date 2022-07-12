@@ -22,7 +22,7 @@ const Movie = ({ movieData, movieID}) => {
 	const [activeTab, setActiveTab] = useState('info')
 	const [isLoggedIn, setLoggedIn] = useState(true) // temporary
 
-	if(reviewData) console.log(reviewData)
+	if(reviewData) console.log(reviewData.reviews)
 
 	const tabClick = e => {
 		setActiveTab(e.target.dataset.tab)
@@ -132,7 +132,7 @@ export async function getStaticProps(context) {
 
 	return {
 		props: { movieData, movieID },
-		revalidate: 10,
+		revalidate: 60,
 	}
 }
 

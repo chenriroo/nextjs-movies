@@ -120,26 +120,25 @@ const Popup = ({ratings, sortedRatings, avgRating, togglePopup}) => {
 	)
 }
 
-const Rating = ({reviewData}) => {
+const Rating = ({ reviewData }) => {
 	const [isActive, setActive] = useState(false)
-	let avgRating, reviews
+	let avgRating, reviews, sortedRatings
 	let ratings = [];
 
-
 	// only if review has a rating === type equals 'review'
-	reviews = reviewData.reviews.filter(rating => rating.type === 'review')
+	if(reviewData) {
+		reviews = reviewData.reviews.filter(rating => rating.type === 'review')
 
-	
-	if(reviews.length > 0) {
-		avgRating = Math.floor(reviews.reduce((acc, review) => acc + review.rating,0) / reviews.length) * 10;
-		reviews.map(review => ratings.push(review.rating))
-	} else {
-		avgRating = 0;
+		if(reviews.length > 0) {
+			avgRating = Math.floor(reviews.reduce((acc, review) => acc + review.rating,0) / reviews.length) * 10;
+			reviews.map(review => ratings.push(review.rating))
+		} else {
+			avgRating = 0;
+		}
+
+		// Sort ratings for the chart
+		sortedRatings = sortRatings(ratings)
 	}
-
-	// Sort ratings for the chart
-	const sortedRatings = sortRatings(ratings)
-
 	
 	const togglePopup = () => {
 		setActive(!isActive)

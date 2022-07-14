@@ -23,7 +23,10 @@
 	flex-flow: column;
 	align-items: center;
 	justify-content: flex-start;
-	background-color: rgb(255,255,255, 0.2);
+	background-color: rgba(25, 28, 36, 0);
+	opacity: 1;
+	background-image: radial-gradient(rgba(255, 255, 255, 0.12) 0.35000000000000003px, rgba(25, 28, 36, 0) 0.35000000000000003px);
+	background-size: 7px 7px;
 }
 
 .poster {

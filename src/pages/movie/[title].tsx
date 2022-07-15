@@ -17,7 +17,7 @@ const fetcher = url => fetch(url).then(r => r.json())
 
 const Movie = ({ movieData, movieID}) => {
 	const url = `/api/review?movie=${movieID}`
-	// const { data:reviewData, error } = useSWR(url,fetcher)
+	const { data:reviewData, error } = useSWR(url,fetcher)
 
 	const [activeTab, setActiveTab] = useState('info')
 	const [isLoggedIn, setLoggedIn] = useState(true) // temporary
@@ -69,12 +69,12 @@ const Movie = ({ movieData, movieID}) => {
 					</div>
 
 					<div className={styles.containerRating}>
-						{/* <Rating reviewData={reviewData} /> */}
+						<Rating reviewData={reviewData} />
 					</div>
 
 
 					<div className={styles.containerRelated}>
-						<SingleLine data={[0,1,2,3,4,5,6,7,8,9,10]} type='movie'/>
+						<SingleLine data={[0,1,2,3,4]} type='movie'/>
 					</div>
 
 				  	<div className={styles.containerSecondaryContent}>
@@ -83,7 +83,7 @@ const Movie = ({ movieData, movieID}) => {
 
 					<div className={styles.containerReviews}>
 						<h2 className="h2section">Reviews</h2>
-						{/* <ReviewSection movieID={movieID} reviewData={reviewData} isLoggedIn={isLoggedIn}/> */}
+						<ReviewSection movieID={movieID} reviewData={reviewData} isLoggedIn={isLoggedIn}/>
 					</div>
 
 				</div>

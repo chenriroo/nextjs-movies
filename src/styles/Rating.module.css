@@ -25,11 +25,12 @@
 	display: flex;
 	flex-flow: column;
 	width: 350px;
-	transform: translate(0px, -10px);
+	transform: translate(-100%, -10px);
 	background-color: rgba(240, 248, 255, 1);
 	color: #031023;
 	border-radius: 4px;
 	top: 0;
+	left: 130px;
 	cursor: default;
 	z-index: 100;
 }
@@ -41,4 +42,9 @@
 	justify-content: center;
 	align-items: center;
 	padding: 10px;
+}
+
+.section:nth-of-type(1) {
+	align-items: flex-end;
+	padding-right: 27px;
 }

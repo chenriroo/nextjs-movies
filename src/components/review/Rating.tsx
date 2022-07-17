@@ -101,13 +101,6 @@ const Popup = ({ratings, sortedRatings, avgRating, togglePopup}) => {
 
 	return (
 		<div className={styles.popup}>
-			<span className={styles.closeModal} onClick={togglePopup}>X</span>
-			<div className={styles.section}>
-				<div className={styles.popupRating}>
-				<CircleRating avgRating={avgRating}/>
-				</div>
-				{/* Score breakdown - Amount of ratings */}
-			</div>
 			<div className={styles.section}>
 				Score distribution
 				<Chart options={options} data={dataVoteDistribution} />

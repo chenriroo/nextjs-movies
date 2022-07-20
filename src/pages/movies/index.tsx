@@ -2,18 +2,20 @@ import Head from "next/head"
 import styles from '../../styles/Movies.module.css'
 import { useState, useEffect } from "react"
 import TopMenu from "../../components/TopMenu"
-import MoviesFilter from "../../components/MoviesFilter"
-import MoviesGrid from "../../components/MoviesGrid"
+import MoviesFilterTop from "../../components/MoviesFilterTop"
+import MoviesFilterSide from "../../components/MoviesFilterSide"
+import SingleLine from "../../components/lists/SingleLine"
+import Layout from "../../components/Layout"
 import useSWR from "swr"
 
 
 
 
 const Movies = () => {
-	const [displayCovers, setDisplayCover] = useState(true)
-	const { data, error } = useSWR('')
+	const [displayCovers, setDisplayCover] = useState(true);
+	const { data, error } = useSWR('');
 
-	const movies = []
+	const movies = [];
 
 	console.log('test')
 
@@ -25,33 +27,31 @@ const Movies = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div className={styles.outerContainer}>
+			<TopMenu />
 
-				<TopMenu />
+			<div className={styles.containerContent}>
 
-				<div className={styles.containerSecond}>
+				<div className={styles.contentWrap}>
+
 
 					<section id={styles.filterSide}>
-						Bla
+						<MoviesFilterSide />
 					</section>
 
-					<div className={styles.secondColumn}>
-						<section id={styles.filterTop}>
-							<MoviesFilter />
-						</section>
-					
-						<section id={styles.movieGrid}>
-							
-							<MoviesGrid movies={movies}/>
-						</section>
-					</div>
+					<section id={styles.filterTop}>
+						<MoviesFilterTop />
+					</section>
+				
+					<section id={styles.movieGrid}>
+						<SingleLine data={['a','b']} type='detail' />
+
+					</section>
 
 
-					
 
 				</div>
-
 			</div>
+
 
 
 		</>

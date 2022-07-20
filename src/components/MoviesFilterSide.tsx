@@ -1,4 +1,4 @@
-import styles from "../styles/MoviesFilterSide.module.css"
+import styles from "./MoviesFilterSide.module.css"
 
 const MoviesFilterSide = () => {
   return (

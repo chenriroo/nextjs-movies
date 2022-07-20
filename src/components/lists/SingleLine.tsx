@@ -16,11 +16,10 @@ const ItemMovie = ({ data }) => {
 	)
 }
 
-const ItemNews = ({data}) => {
+const ItemMovieDetail = ({data}) => {
 	return (
 		<div className={styles.containerItem}>
-			<span>News Title</span>
-			<span>Content...</span>
+			<span>Movie</span>
 		</div>
 	)
 }
@@ -34,8 +33,8 @@ const SingleLine = ({ data, type }) => {
 			case 'movie':
 				return <ItemMovie key={`movie-${id}`} data={item} />
 			break;
-			case 'news':
-				return <ItemNews key={`newsitem-${id}`} data={item} />
+			case 'detail':
+				return <ItemMovieDetail key={`newsitem-${id}`} data={item} />
 			break;
 			default:
 				console.log('error')

@@ -1,4 +1,4 @@
-import styles from '../styles/MoviesFilter.module.css'
+import styles from './MoviesFilterTop.module.css'
 import Dropdown from './Dropdown'
 
 const MoviesFilter = () => {

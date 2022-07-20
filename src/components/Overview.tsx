@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import styles from '../styles/Overview.module.css'
-import OverviewFilter from './MoviesFilter'
+import OverviewFilter from './MoviesFilterTop'
 import OverviewEntry from './OverviewEntry'
 import OverviewDetail from './OverviewDetail'
 

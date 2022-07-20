@@ -1,35 +1,33 @@
-.outerContainer {
-	margin: 3rem;
-	display: flex;
-	flex-flow: column;
-}
-
-.containerSecond {
+.containerContent {
 	display: flex;
 	justify-content: center;
 	padding-bottom: 2rem;
-	background-color: rgba(19, 23, 24, 0.6);
+	padding-top: 450px;
 	border-radius: 0 0 20px 20px;
 }
 
-.secondColumn{
-	flex: 1;
-	display: flex;
-	flex-flow: column;
-	border-radius: 4px;
-	margin: 5px 5px 5px 0;
+.contentWrap {
+	display: grid;
+	grid-template-columns: 250px 1fr ;
+	grid-template-rows: 100px 1fr;
+	width: 950px;
+	grid-gap: 10px;
+	z-index: 100;
 }
 
 #filterTop {
+	grid-column: 2/3;
+	grid-row: 1/2;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: rgba(80, 80, 80, 0.1);
 	padding: 1.5rem;
-
 }
 
 #filterSide {
+	grid-column: 1/2;
+	grid-row: 2/3;
 	flex: 0 0 12rem;;
 	background-color: rgba(80, 80, 80, 0.1);
 	border-radius: 4px;
@@ -38,6 +36,8 @@
 }
 
 #movieGrid {
+	grid-column: 2/3;
+	grid-row: 2/3;
 	flex: 4;
 	margin-top: 5px;
 	padding: 1.5rem;

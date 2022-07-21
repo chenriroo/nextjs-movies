@@ -43,7 +43,7 @@ const Movies = () => {
 					</section>
 				
 					<section id={styles.movieGrid}>
-						<SingleLine data={['a','b']} type='detail' />
+						<SingleLine data={['a','b','c','d']} type='detail' />
 
 					</section>
 

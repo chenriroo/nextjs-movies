@@ -2,7 +2,7 @@ import Head from "next/head"
 import styles from '../../styles/Movies.module.css'
 import { useState, useEffect } from "react"
 import TopMenu from "../../components/TopMenu"
-import MoviesFilterTop from "../../components/MoviesFilterTop"
+import MoviesSort from "../../components/MoviesSort"
 import MoviesFilterSide from "../../components/MoviesFilterSide"
 import SingleLine from "../../components/lists/SingleLine"
 import Layout from "../../components/Layout"
@@ -17,7 +17,10 @@ const Movies = () => {
 
 	const movies = [];
 
-	console.log('test')
+	// Later we should retrieve all available genres from existing movies in the database
+	const genres = ['action','animation', 'comedy','drama','fantasy','horror','romance','sciencefiction','thriller','war']
+	const rating = ['1','2','3','4','5']
+	const decades = ['70s','80s','90s','00s','10s','20s']
 
 	return (
 		<>
@@ -35,11 +38,13 @@ const Movies = () => {
 
 
 					<section id={styles.filterSide}>
-						<MoviesFilterSide />
+						<MoviesFilterSide name='Genre' options={genres}  />
+						<MoviesFilterSide name='Rating' options={rating}  />
+						<MoviesFilterSide name='Decade' options={decades}  />
 					</section>
 
 					<section id={styles.filterTop}>
-						<MoviesFilterTop />
+						<MoviesSort />
 					</section>
 				
 					<section id={styles.movieGrid}>

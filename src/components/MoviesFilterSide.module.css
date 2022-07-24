@@ -1,0 +1,22 @@
+.title {
+	font-size: 1.3rem;
+	cursor: pointer;
+}
+
+.title:hover, .option:hover {
+	color: red;
+}
+
+.option {
+	display: flex;
+	justify-content: space-between;
+}
+
+.option input[type='checkbox'] {
+	display:none;
+}
+
+
+.option input[type='checkbox']:checked + label {
+	color: green;
+}

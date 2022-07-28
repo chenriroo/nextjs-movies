@@ -1,6 +1,7 @@
 // Entries on single dimension
 import styles from './SingleLine.module.css'
 import { useState } from 'react'
+import ItemMovieDetail from './ItemMovieDetail'
 
 const ItemMovie = ({ data }) => {
 	return (
@@ -16,25 +17,16 @@ const ItemMovie = ({ data }) => {
 	)
 }
 
-const ItemMovieDetail = ({data}) => {
-	return (
-		<div className={styles.containerItem}>
-			<span>Movie</span>
-		</div>
-	)
-}
-
-
 const SingleLine = ({ data, type }) => {
 
-	const listItems = data.map((id,item) => {
-
+	const listItems = data.map((item,id) => {
 		switch(type) {
 			case 'movie':
 				return <ItemMovie key={`movie-${id}`} data={item} />
 			break;
 			case 'detail':
-				return <ItemMovieDetail key={`newsitem-${id}`} data={item} />
+				console.log(`movie-${id}`)
+				return <ItemMovieDetail key={`movie-${id}`} data={item} />
 			break;
 			default:
 				console.log('error')

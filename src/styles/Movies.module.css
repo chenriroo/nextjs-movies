@@ -35,10 +35,13 @@
 	padding: 1.5rem;
 }
 
-#movieGrid {
+#movieItems {
 	grid-column: 2/3;
 	grid-row: 2/3;
-	flex: 4;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;;
+	align-content: flex-start;
 	margin-top: 5px;
 	padding: 1.5rem;
 	background-color: rgba(80, 80, 80, 0.1);

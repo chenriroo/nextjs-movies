@@ -1,21 +1,32 @@
+import { useState } from "react"
 import styles from "./MoviesFilterSide.module.css"
 
 const MoviesFilterSide = ({ name, options  }) => {
-  return (
-	<div>
-		<span className={styles.title}>{name}</span>
+	const [isVisible, setVisibility] = useState(false)
 
+
+	function toggleDisplay() {
+		setVisibility(!isVisible)
+	}
+
+	function handleCheckbox(e) {
+		console.log(e.target)
+	}
+
+	return (
+	<div>
+		<span className={styles.title} onClick={toggleDisplay}>{name}</span>
 		{
+			isVisible &&
 			options.map(option =>
 			<li key={option} className={styles.option}>
-				<input type="checkbox" name={option} id={option} />
+				<input type="checkbox" name={option} id={option} onClick={handleCheckbox } />
 				<label htmlFor={option}>{option}</label>
 				<span>10</span>
 			</li> )
 		}
-
 	</div>
-  )
+	)
 }
 
 export default MoviesFilterSide

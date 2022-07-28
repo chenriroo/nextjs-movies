@@ -8,14 +8,32 @@ import SingleLine from "../../components/lists/SingleLine"
 import Layout from "../../components/Layout"
 import useSWR from "swr"
 
-
-
-
 const Movies = () => {
 	const [displayCovers, setDisplayCover] = useState(true);
 	const { data, error } = useSWR('');
+	const [filters, setFilters] = useState([]);
 
-	const movies = [];
+	const movies = [
+		{
+			title: 'Alien',
+			genre: ['sciencefiction','horror'],
+			year: 1979,
+			rating: 8,
+		},
+		{
+			title: 'Alien',
+			genre: ['sciencefiction','horror'],
+			year: 1979,
+			rating: 8,
+		},
+		{
+			title: 'Alien',
+			genre: ['sciencefiction','horror'],
+			year: 1979,
+			rating: 8,
+		},
+
+	];
 
 	// Later we should retrieve all available genres from existing movies in the database
 	const genres = ['action','animation', 'comedy','drama','fantasy','horror','romance','sciencefiction','thriller','war']
@@ -38,6 +56,8 @@ const Movies = () => {
 
 
 					<section id={styles.filterSide}>
+						<span>Filters applied:</span>
+						
 						<MoviesFilterSide name='Genre' options={genres}  />
 						<MoviesFilterSide name='Rating' options={rating}  />
 						<MoviesFilterSide name='Decade' options={decades}  />
@@ -47,8 +67,8 @@ const Movies = () => {
 						<MoviesSort />
 					</section>
 				
-					<section id={styles.movieGrid}>
-						<SingleLine data={['a','b','c','d']} type='detail' />
+					<section id={styles.movieItems}>
+						<SingleLine data={movies} type='detail' />
 
 					</section>
 

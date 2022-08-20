@@ -2,40 +2,54 @@ import styles from './ItemMovieDetail.module.css'
 import { useState, useEffect, useRef  } from 'react'
 import { animated, useSpring } from '@react-spring/web'
 import { fileURLToPath } from 'url'
+import { isLocalURL } from 'next/dist/shared/lib/router/router'
+import { applicationDefault } from 'firebase-admin/app'
 
 const ItemMovieDetail = ({data}) => {
 	const [isHovered, setHovered] = useState(false)
-	const [descriptionHeight, setDescriptionHeight] = useState(0)
 	const dataDescription = data.description;
 	const refElementDescription = useRef();
-
-	const props = useSpring({
-		 to: { y: 0 }, 
-		 from: { y: 0-descriptionHeight+100 },
-		 reset: true,
-		 delay: 2000,
-		 reverse: isHovered,
-		 config: { duration: 3000 },
-		 onRest: () => setHovered(!isHovered),
-		 })
+	const [springDescription, setSpringDescription] = useSpring(() => ({
+		 y: 0,
+	 }))
 
 	function Hover() {
-		setHovered(!isHovered)
+		setHovered(true);
 		const el = refElementDescription.current;
 		const height = el.clientHeight;
-		setDescriptionHeight(height)
+
+		if(height > 110) {
+			setSpringDescription.start({
+				from: { y:0 },
+				to: { y: 0-height+100 },
+				loop: { reverse: true },
+				delay: 2000,
+				config: {
+					duration: 3000,
+				}
+			})
+		}
+	}
+
+	function unHover() {
+		setHovered(false);
+		setSpringDescription.start({
+			y: 0,
+			config: {
+				duration: 100,
+			}
+		})
 	}
 
 	return (
 		<div className={styles.itemRow}>
 			<div className={styles.outerContainer}>
-				<div className={`${styles.itemContainer}`} onMouseEnter={() => Hover()} >
-				{/* <div className={`${styles.itemContainer}`} > */}
+				<div className={`${styles.itemContainer}`} onMouseEnter={() => Hover()} onMouseLeave={() => unHover()} >
 					<div className={styles.HalfLeft}>
 					<div className={styles.poster}></div>
-						{/* {
+						{
 							isHovered && <div className={styles.video}>video</div>
-						} */}
+						}
 					</div>
 					<div className={styles.HalfRight} >
 						<div className={styles.title}>
@@ -61,7 +75,7 @@ const ItemMovieDetail = ({data}) => {
 									<animated.div
 									className={styles.descText}
 									ref={refElementDescription}
-									style={props}>
+									style={springDescription}>
 									{dataDescription}
 									</animated.div>
 							</div>

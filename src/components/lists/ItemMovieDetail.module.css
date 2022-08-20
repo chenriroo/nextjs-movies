@@ -4,13 +4,6 @@
 	100% { opacity: 1; }
 }
 
-@keyframes scrollText {
-	0% { transform: translateY(0%) }
-	10% { transform: translateY(0%) }
-	50% { transform: translateY(-50%) }
-	100% { transform: translateY(0%) }
-}
-
 .itemRow {
 	position: relative;
 	margin-bottom: 4px;
@@ -139,7 +132,6 @@
 .descText {
 	display:block;
 	height: auto;
-	transform: translateY(0%);
 }
 
 .itemContainer:hover > .HalfRight > .details > .descContainer { display:block;  }

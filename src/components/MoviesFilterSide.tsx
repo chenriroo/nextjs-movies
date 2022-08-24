@@ -1,7 +1,7 @@
 import { useState } from "react"
 import styles from "./MoviesFilterSide.module.css"
 
-const MoviesFilterSide = ({ name, options  }) => {
+const MoviesFilterSide = ({ name, options, handleFilters  }) => {
 	const [isVisible, setVisibility] = useState(false)
 
 
@@ -10,7 +10,12 @@ const MoviesFilterSide = ({ name, options  }) => {
 	}
 
 	function handleCheckbox(e) {
-		console.log(e.target)
+		const el = e.target;
+		
+		handleFilters({
+			entry: `${name.toLowerCase()}-${el.name}`,
+			checked: el.checked
+		})
 	}
 
 	return (

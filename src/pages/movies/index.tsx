@@ -1,18 +1,85 @@
 import Head from "next/head"
 import styles from '../../styles/Movies.module.css'
-import { useState, useEffect } from "react"
+import { useState, useEffect, useReducer } from "react"
 import TopMenu from "../../components/TopMenu"
 import MoviesSort from "../../components/MoviesSort"
 import MoviesFilterSide from "../../components/MoviesFilterSide"
 import SingleLine from "../../components/lists/SingleLine"
 import Layout from "../../components/Layout"
 import useSWR from "swr"
+import InfoButton from "../../components/InfoButton"
+
+const fetcher = url => fetch(url).then(r => r.json())
+
+function helperReducer(arrState, action) {
+	let arr = arrState;
+	if(action.payload.checked) {
+		arr.push(action.payload.value)
+	} else {
+		arr = arr.filter(el => el !== action.payload.value)
+	}
+	return arr 
+}
+
+function reducer(state, action) {
+	let arr
+	switch(action.type) {
+		case "title":
+			arr = helperReducer(state.title, action)
+			return {
+				...state,
+				title: arr
+			};
+		case "genre":
+			arr = helperReducer(state.genre, action)
+			return {
+				...state,
+				genre: arr
+			};
+		case "rating":
+			arr = helperReducer(state.rating, action)
+			return {
+				...state,
+				rating: arr
+			};
+		case "decade":
+			arr = helperReducer(state.decade, action)
+			return {
+				...state,
+				decade: arr
+			};
+		default:
+			return state;
+	}
+}
+
+const initialState = {
+	title: '',
+	genre: [],
+	rating: [],
+	decade: []
+}
 
 const Movies = () => {
 	const [displayCovers, setDisplayCover] = useState(true);
 	const { data, error } = useSWR('');
-	const [filters, setFilters] = useState([]);
+	const [state, dispatch] = useReducer(reducer, initialState);
 
+	function handleFilters(data) {
+		const filterType = data.entry.split('-')[0];
+
+		dispatch({
+			type: filterType,
+			payload: {
+				checked: data.checked, 
+				value: data.entry.split('-')[1]
+			}
+		})
+	}
+
+	console.log(state)
+	
+	// Placeholder data
 	const movies = [
 		{
 			title: 'Alien',
@@ -73,11 +140,17 @@ const Movies = () => {
 
 
 					<section id={styles.filterSide}>
-						<span>Filters applied:</span>
+						<div>
+							<span>Filters:</span>
+							{ state.genre.map((entry, i) => { return <InfoButton key={`genre-${i}`} text={entry} canDelete={true}/> })	}
+							{ state.rating.map((entry, i) => { return <InfoButton key={`rating-${i}`} text={entry} canDelete={true}/> })	}
+							{ state.decade.map((entry, i) => { return <InfoButton key={`decade-${i}`} text={entry} canDelete={true}/>})	}
+						</div>
+						<span></span>
 						
-						<MoviesFilterSide name='Genre' options={genres}  />
-						<MoviesFilterSide name='Rating' options={rating}  />
-						<MoviesFilterSide name='Decade' options={decades}  />
+						<MoviesFilterSide name='Genre' options={genres} handleFilters={handleFilters} />
+						<MoviesFilterSide name='Rating' options={rating} handleFilters={handleFilters} />
+						<MoviesFilterSide name='Decade' options={decades} handleFilters={handleFilters} />
 					</section>
 
 					<section id={styles.filterTop}>

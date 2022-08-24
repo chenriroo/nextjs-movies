@@ -4,6 +4,8 @@ import { useState } from 'react'
 import ItemMovieDetail from './ItemMovieDetail'
 
 const ItemMovie = ({ data }) => {
+
+	
 	return (
 		<div className={styles.containerItem}>
 			<div>poster</div>
@@ -15,9 +17,11 @@ const ItemMovie = ({ data }) => {
 			<div>R</div>
 		</div>
 	)
+
 }
 
 const SingleLine = ({ data, type }) => {
+
 
 	const listItems = data.map((item,id) => {
 		switch(type) {
@@ -25,7 +29,6 @@ const SingleLine = ({ data, type }) => {
 				return <ItemMovie key={`movie-${id}`} data={item} />
 			break;
 			case 'detail':
-				console.log(`movie-${id}`)
 				return <ItemMovieDetail key={`movie-${id}`} data={item} />
 			break;
 			default:

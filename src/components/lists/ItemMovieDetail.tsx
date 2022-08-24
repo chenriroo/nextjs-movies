@@ -1,9 +1,6 @@
 import styles from './ItemMovieDetail.module.css'
-import { useState, useEffect, useRef  } from 'react'
+import { useState, useRef  } from 'react'
 import { animated, useSpring } from '@react-spring/web'
-import { fileURLToPath } from 'url'
-import { isLocalURL } from 'next/dist/shared/lib/router/router'
-import { applicationDefault } from 'firebase-admin/app'
 
 const ItemMovieDetail = ({data}) => {
 	const [isHovered, setHovered] = useState(false)
@@ -48,7 +45,7 @@ const ItemMovieDetail = ({data}) => {
 					<div className={styles.HalfLeft}>
 					<div className={styles.poster}></div>
 						{
-							isHovered && <div className={styles.video}>video</div>
+							isHovered && <div className={styles.media}>media</div>
 						}
 					</div>
 					<div className={styles.HalfRight} >

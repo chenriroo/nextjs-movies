@@ -78,9 +78,9 @@ const Movies = () => {
 		})
 	}
 
-	function deleteFilter(tag) {
+	function deleteFilter(tag,type) {
 		dispatch({
-			type: 'genre', // edit to dynamic
+			type: type, // edit to dynamic
 			payload: {
 				checked: false,
 				value: tag
@@ -155,12 +155,14 @@ const Movies = () => {
 							{ state.genre.map((entry, i) => { 
 								return <InfoButton key={`genre-${i}`} 
 									text={entry} 
+									type='genre'
 									canDelete={true}
 									callback={deleteFilter}/> })
 							}
 							{ state.rating.map((entry, i) => {
 								 return <InfoButton key={`rating-${i}`} 
-									text={entry} 
+									text={entry}
+									type='rating' 
 									canDelete={true}
 									callback={deleteFilter}/> 
 									})
@@ -168,7 +170,8 @@ const Movies = () => {
 							{ state.decade.map((entry, i) => {
 								return <InfoButton 
 									key={`decade-${i}`} 
-									text={entry} 
+									text={entry}
+									type='decade' 
 									canDelete={true}
 									callback={deleteFilter}/>})
 							}

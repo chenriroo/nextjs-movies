@@ -4,15 +4,16 @@ import styles from './InfoButton.module.css'
 
 interface InfoButtonProps {
 	text:string,
+	type?:string,
 	canDelete: boolean,
 	callback?: Function
 }
 
-const InfoButton = ({text, canDelete, callback}:InfoButtonProps) => {
+const InfoButton = ({text,type, canDelete, callback}:InfoButtonProps) => {
 
 	function handleClick() {
 		if(!canDelete) return
-		callback(text)
+		callback(text,type)
 	}
 
 	return (

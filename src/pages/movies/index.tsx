@@ -8,6 +8,7 @@ import SingleLine from "../../components/lists/SingleLine"
 import Layout from "../../components/Layout"
 import useSWR from "swr"
 import InfoButton from "../../components/InfoButton"
+import { takeCoverage } from "v8"
 
 const fetcher = url => fetch(url).then(r => r.json())
 
@@ -77,6 +78,16 @@ const Movies = () => {
 		})
 	}
 
+	function deleteFilter(tag) {
+		dispatch({
+			type: 'genre', // edit to dynamic
+			payload: {
+				checked: false,
+				value: tag
+			}
+		})
+	}
+
 	console.log(state)
 	
 	// Placeholder data
@@ -124,6 +135,7 @@ const Movies = () => {
 	const rating = ['1','2','3','4','5']
 	const decades = ['70s','80s','90s','00s','10s','20s']
 
+
 	return (
 		<>
 			<Head>
@@ -135,16 +147,31 @@ const Movies = () => {
 			<TopMenu />
 
 			<div className={styles.containerContent}>
-
 				<div className={styles.contentWrap}>
 
-
 					<section id={styles.filterSide}>
+						<span>Active filters</span>
 						<div>
-							<span>Filters:</span>
-							{ state.genre.map((entry, i) => { return <InfoButton key={`genre-${i}`} text={entry} canDelete={true}/> })	}
-							{ state.rating.map((entry, i) => { return <InfoButton key={`rating-${i}`} text={entry} canDelete={true}/> })	}
-							{ state.decade.map((entry, i) => { return <InfoButton key={`decade-${i}`} text={entry} canDelete={true}/>})	}
+							{ state.genre.map((entry, i) => { 
+								return <InfoButton key={`genre-${i}`} 
+									text={entry} 
+									canDelete={true}
+									callback={deleteFilter}/> })
+							}
+							{ state.rating.map((entry, i) => {
+								 return <InfoButton key={`rating-${i}`} 
+									text={entry} 
+									canDelete={true}
+									callback={deleteFilter}/> 
+									})
+							}
+							{ state.decade.map((entry, i) => {
+								return <InfoButton 
+									key={`decade-${i}`} 
+									text={entry} 
+									canDelete={true}
+									callback={deleteFilter}/>})
+							}
 						</div>
 						<span></span>
 						

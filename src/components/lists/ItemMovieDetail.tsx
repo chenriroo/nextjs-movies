@@ -1,6 +1,7 @@
 import styles from './ItemMovieDetail.module.css'
 import { useState, useRef  } from 'react'
 import { animated, useSpring } from '@react-spring/web'
+import InfoButton from '../InfoButton'
 
 const ItemMovieDetail = ({data}) => {
 	const [isHovered, setHovered] = useState(false)
@@ -59,8 +60,8 @@ const ItemMovieDetail = ({data}) => {
 
 						<div className={styles.details}>
 							<div className={styles.tags}>
-								{	
-									data.genre.map(genre => <div key={`genre-${genre}`}className={styles.tag}>{genre}</div> )
+								{
+									data.genre.map((genre,i) => <InfoButton key={`genre-${i}`} text={genre} canDelete={false}  /> )
 								}
 							</div>
 

@@ -178,9 +178,9 @@ const Movies = () => {
 						</div>
 						<span></span>
 						
-						<MoviesFilterSide name='Genre' options={genres} handleFilters={handleFilters} />
-						<MoviesFilterSide name='Rating' options={rating} handleFilters={handleFilters} />
-						<MoviesFilterSide name='Decade' options={decades} handleFilters={handleFilters} />
+						<MoviesFilterSide name='Genre' options={genres} handleFilters={handleFilters} state={state.genre} />
+						<MoviesFilterSide name='Rating' options={rating} handleFilters={handleFilters} state={state.rating}/>
+						<MoviesFilterSide name='Decade' options={decades} handleFilters={handleFilters} state={state.decade}/>
 					</section>
 
 					<section id={styles.filterTop}>

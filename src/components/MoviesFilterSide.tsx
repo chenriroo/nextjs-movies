@@ -1,7 +1,7 @@
 import { useState } from "react"
 import styles from "./MoviesFilterSide.module.css"
 
-const MoviesFilterSide = ({ name, options, handleFilters  }) => {
+const MoviesFilterSide = ({ name, options, handleFilters, state  }) => {
 	const [isVisible, setVisibility] = useState(false)
 
 
@@ -23,12 +23,19 @@ const MoviesFilterSide = ({ name, options, handleFilters  }) => {
 		<span className={styles.title} onClick={toggleDisplay}>{name}</span>
 		{
 			isVisible &&
-			options.map(option =>
-			<li key={option} className={styles.option}>
-				<input type="checkbox" name={option} id={option} onClick={handleCheckbox } />
+			options.map(option => {
+				return <li key={option} className={styles.option}>
+				<input 
+				type="checkbox" 
+				name={option} 
+				id={option} 
+				onChange={handleCheckbox} 
+				checked={state.includes(option)}
+				/>
 				<label htmlFor={option}>{option}</label>
 				<span>10</span>
-			</li> )
+			</li> 
+			})
 		}
 	</div>
 	)

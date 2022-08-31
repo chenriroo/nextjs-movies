@@ -41,3 +41,7 @@
 	/* padding: 1.5rem; temp  */
 	background-color: rgba(80, 80, 80, 0.1);
 }
+
+.activeFilters {
+	border: 1px solid lightblue;
+}

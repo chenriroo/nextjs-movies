@@ -4,6 +4,11 @@ import styles from "./MoviesFilterSide.module.css"
 const MoviesFilterSide = ({ name, options, handleFilters, state  }) => {
 	const [isVisible, setVisibility] = useState(false)
 
+	const optionInactive  = options.filter(option => {
+		if(!state.includes(option)){
+			return option
+		}
+	})
 
 	function toggleDisplay() {
 		setVisibility(!isVisible)
@@ -19,11 +24,10 @@ const MoviesFilterSide = ({ name, options, handleFilters, state  }) => {
 	}
 
 	return (
-	<div>
+	<div className={styles.section}>
 		<span className={styles.title} onClick={toggleDisplay}>{name}</span>
 		{
-			isVisible &&
-			options.map(option => {
+			state.map(option => {
 				return <li key={option} className={styles.option}>
 				<input 
 				type="checkbox" 
@@ -33,7 +37,23 @@ const MoviesFilterSide = ({ name, options, handleFilters, state  }) => {
 				checked={state.includes(option)}
 				/>
 				<label htmlFor={option}>{option}</label>
-				<span>10</span>
+				{/* <span className={styles.foo}>10</span> */}
+			</li> 
+			})
+		}
+		{
+			isVisible &&
+			optionInactive.map(option => {
+				return <li key={option} className={styles.option}>
+				<input 
+				type="checkbox" 
+				name={option} 
+				id={option} 
+				onChange={handleCheckbox} 
+				checked={state.includes(option)}
+				/>
+				<label htmlFor={option}>{option}</label>
+				{/* <span className={styles.foo}>10</span> */}
 			</li> 
 			})
 		}

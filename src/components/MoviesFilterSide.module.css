@@ -1,6 +1,12 @@
+.section {
+	margin-top: 20px;
+}
+
 .title {
-	font-size: 1.3rem;
+	font-size: 1.2rem;
 	cursor: pointer;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 
 .title:hover, .option:hover {
@@ -16,7 +22,17 @@
 	display:none;
 }
 
+.option input[type='checkbox'] + label{
+	width: 100%;
+	padding: 1px 0 1px 10px;
+}
 
 .option input[type='checkbox']:checked + label {
-	color: green;
+	width: 100%;
+	font-weight: bold;
+	border-left: 3px solid rgba(255, 166, 0, 0.7);
+	padding: 1px 0 1px 7px;
 }
+
+
+

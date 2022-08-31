@@ -150,8 +150,10 @@ const Movies = () => {
 				<div className={styles.contentWrap}>
 
 					<section id={styles.filterSide}>
+						
 						<span>Active filters</span>
-						<div>
+						
+						<div className={styles.activeFilters}>
 							{ state.genre.map((entry, i) => { 
 								return <InfoButton key={`genre-${i}`} 
 									text={entry} 
@@ -176,7 +178,6 @@ const Movies = () => {
 									callback={deleteFilter}/>})
 							}
 						</div>
-						<span></span>
 						
 						<MoviesFilterSide name='Genre' options={genres} handleFilters={handleFilters} state={state.genre} />
 						<MoviesFilterSide name='Rating' options={rating} handleFilters={handleFilters} state={state.rating}/>

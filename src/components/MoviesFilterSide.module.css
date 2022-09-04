@@ -24,14 +24,15 @@
 
 .option input[type='checkbox'] + label{
 	width: 100%;
-	padding: 1px 0 1px 10px;
+	padding: 0px 0 0px 10px;
+	margin: 2px 0;
 }
 
 .option input[type='checkbox']:checked + label {
 	width: 100%;
 	font-weight: bold;
 	border-left: 3px solid rgba(255, 166, 0, 0.7);
-	padding: 1px 0 1px 7px;
+	padding: 0px 0 0px 7px;
 }
 
 

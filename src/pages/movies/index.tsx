@@ -6,7 +6,7 @@ import MoviesSort from "../../components/MoviesSort"
 import MoviesFilterSide from "../../components/MoviesFilterSide"
 import SingleLine from "../../components/lists/SingleLine"
 import Layout from "../../components/Layout"
-import useSWR from "swr"
+import useSWRInfinite from "swr"
 import InfoButton from "../../components/InfoButton"
 import { takeCoverage } from "v8"
 
@@ -20,6 +20,18 @@ function helperReducer(arrState, action) {
 		arr = arr.filter(el => el !== action.payload.value)
 	}
 	return arr 
+}
+
+function helperQuery(arr,type) {
+	let output
+	if(arr.length > 1) {
+		output = arr.map(el => el).join('+')
+		return `${type}=${output}`
+	} else if(arr.length === 1) {
+		return `${type}=${arr[0]}`
+	} else {
+		return ''
+	}
 }
 
 function reducer(state, action) {
@@ -63,8 +75,16 @@ const initialState = {
 
 const Movies = () => {
 	const [displayCovers, setDisplayCover] = useState(true);
-	const { data, error } = useSWR('');
 	const [state, dispatch] = useReducer(reducer, initialState);
+
+	const urlGenre = helperQuery(state.genre, 'genre')
+	const urlRating = helperQuery(state.rating, 'rating')
+	const urlDecade = helperQuery(state.decade, 'decade')
+
+	const url = `/api/movies?${urlGenre}&${urlRating}&${urlDecade}`
+	const { data: searchData, error: searchError } = useSWRInfinite(url, fetcher);
+
+	console.log(url)
 
 	function handleFilters(data) {
 		const filterType = data.entry.split('-')[0];
@@ -80,15 +100,13 @@ const Movies = () => {
 
 	function deleteFilter(tag,type) {
 		dispatch({
-			type: type, // edit to dynamic
+			type: type,
 			payload: {
 				checked: false,
 				value: tag
 			}
 		})
 	}
-
-	console.log(state)
 	
 	// Placeholder data
 	const movies = [

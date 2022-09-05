@@ -12,6 +12,7 @@ import { takeCoverage } from "v8"
 
 const fetcher = url => fetch(url).then(r => r.json())
 
+// filter On / Off
 function helperReducer(arrState, action) {
 	let arr = arrState;
 	if(action.payload.checked) {
@@ -24,7 +25,12 @@ function helperReducer(arrState, action) {
 
 function helperQuery(arr,type) {
 	let output
-	if(arr.length > 1) {
+
+	if(type === 'rating') {
+
+
+		return
+	} else if(arr.length > 1) {
 		output = arr.map(el => el).join('+')
 		return `${type}=${output}`
 	} else if(arr.length === 1) {
@@ -49,12 +55,6 @@ function reducer(state, action) {
 				...state,
 				genre: arr
 			};
-		case "rating":
-			arr = helperReducer(state.rating, action)
-			return {
-				...state,
-				rating: arr
-			};
 		case "decade":
 			arr = helperReducer(state.decade, action)
 			return {
@@ -69,7 +69,6 @@ function reducer(state, action) {
 const initialState = {
 	title: '',
 	genre: [],
-	rating: [],
 	decade: []
 }
 
@@ -82,9 +81,7 @@ const Movies = () => {
 	const urlDecade = helperQuery(state.decade, 'decade')
 
 	const url = `/api/movies?${urlGenre}&${urlRating}&${urlDecade}`
-	const { data: searchData, error: searchError } = useSWRInfinite(url, fetcher);
-
-	console.log(url)
+	//const { data: searchData, error: searchError } = useSWRInfinite(url, fetcher);
 
 	function handleFilters(data) {
 		const filterType = data.entry.split('-')[0];
@@ -150,7 +147,6 @@ const Movies = () => {
 
 	// Later we should retrieve all available genres from existing movies in the database
 	const genres = ['action','animation', 'comedy','drama','fantasy','horror','romance','sciencefiction','thriller','war']
-	const rating = ['1','2','3','4','5']
 	const decades = ['70s','80s','90s','00s','10s','20s']
 
 
@@ -179,13 +175,13 @@ const Movies = () => {
 									canDelete={true}
 									callback={deleteFilter}/> })
 							}
-							{ state.rating.map((entry, i) => {
-								 return <InfoButton key={`rating-${i}`} 
-									text={entry}
-									type='rating' 
-									canDelete={true}
-									callback={deleteFilter}/> 
-									})
+							{
+								state.rating.active &&
+								<InfoButton  
+								text={state.rating.mode}
+								type='rating' 
+								canDelete={true}
+								callback={deleteFilter}/> 
 							}
 							{ state.decade.map((entry, i) => {
 								return <InfoButton 
@@ -198,7 +194,6 @@ const Movies = () => {
 						</div>
 						
 						<MoviesFilterSide name='Genre' options={genres} handleFilters={handleFilters} state={state.genre} />
-						<MoviesFilterSide name='Rating' options={rating} handleFilters={handleFilters} state={state.rating}/>
 						<MoviesFilterSide name='Decade' options={decades} handleFilters={handleFilters} state={state.decade}/>
 					</section>
 

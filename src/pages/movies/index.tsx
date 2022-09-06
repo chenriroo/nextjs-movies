@@ -75,6 +75,7 @@ const initialState = {
 const Movies = () => {
 	const [displayCovers, setDisplayCover] = useState(true);
 	const [state, dispatch] = useReducer(reducer, initialState);
+	const [activeSort, setActiveSort] = useState('');
 
 	const urlGenre = helperQuery(state.genre, 'genre')
 	const urlRating = helperQuery(state.rating, 'rating')
@@ -82,6 +83,14 @@ const Movies = () => {
 
 	const url = `/api/movies?${urlGenre}&${urlRating}&${urlDecade}`
 	//const { data: searchData, error: searchError } = useSWRInfinite(url, fetcher);
+
+	function handleSortInput(button) {
+		if(activeSort === button) {
+			setActiveSort('')
+		} else {
+			setActiveSort(button)
+		}
+	}
 
 	function handleFilters(data) {
 		const filterType = data.entry.split('-')[0];
@@ -175,14 +184,6 @@ const Movies = () => {
 									canDelete={true}
 									callback={deleteFilter}/> })
 							}
-							{
-								state.rating.active &&
-								<InfoButton  
-								text={state.rating.mode}
-								type='rating' 
-								canDelete={true}
-								callback={deleteFilter}/> 
-							}
 							{ state.decade.map((entry, i) => {
 								return <InfoButton 
 									key={`decade-${i}`} 
@@ -198,7 +199,7 @@ const Movies = () => {
 					</section>
 
 					<section id={styles.filterTop}>
-						<MoviesSort />
+						<MoviesSort activeSort={activeSort} callBack={handleSortInput}/>
 					</section>
 				
 					<section id={styles.movieItems}>

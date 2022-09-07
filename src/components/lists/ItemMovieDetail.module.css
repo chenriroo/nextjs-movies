@@ -27,19 +27,36 @@
 	grid-template-areas: "left right right right";
 	grid-template-columns: 100px auto 25% 25%;
 	grid-template-rows: auto;
-	background-color: #456;
+	background: linear-gradient(#456,rgb(63, 79, 95));
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-	transition: all .2s ease;
+	z-index:0;
+	transition: 
+	height .2s ease, 
+	width .2s ease, 
+	top .2s ease, 
+	left .2s ease, 
+	left .2s ease, 
+	grid-template-columns .2s ease, 
+	z-index .2s .2s
 }
 
 .itemContainer:hover {
 	top: -15px;
-	left: -10px;
+	left: -20px;
 	height: 160px;
-	width: 620px;
+	width: 640px;
+	background: linear-gradient(rgb(53, 65, 77),rgb(48, 59, 70));
 	grid-template-columns: 285px auto 25% 25%;
 	z-index: 100;
+	transition: 
+	height .2s ease, 
+	width .2s ease, 
+	top .2s ease, 
+	left .2s ease, 
+	left .2s ease, 
+	grid-template-columns .2s ease, 
+	z-index .0s .0s
 }
 
 
@@ -65,7 +82,7 @@
 	width: 100%;
 	animation: fadeIn 0.4s;
 	text-align: center;
-	border-right: 1px solid rgba(255, 255, 255, 0.2);
+
 }
 .itemContainer:hover > .HalfLeft > .media { display: block; }
 

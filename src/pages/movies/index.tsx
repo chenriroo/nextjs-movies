@@ -197,14 +197,16 @@ const Movies = () => {
 						<MoviesFilterSide name='Genre' options={genres} handleFilters={handleFilters} state={state.genre} />
 						<MoviesFilterSide name='Decade' options={decades} handleFilters={handleFilters} state={state.decade}/>
 					</section>
+					
+					<section id={styles.right}>
+						<div id={styles.filterTop}>
+							<MoviesSort activeSort={activeSort} callBack={handleSortInput}/>
+						</div>
+					
+						<div id={styles.movieItems}>
+							<SingleLine data={movies} type='detail' />
 
-					<section id={styles.filterTop}>
-						<MoviesSort activeSort={activeSort} callBack={handleSortInput}/>
-					</section>
-				
-					<section id={styles.movieItems}>
-						<SingleLine data={movies} type='detail' />
-
+						</div>
 					</section>
 
 

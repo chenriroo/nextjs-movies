@@ -2,8 +2,6 @@ import styles from './MoviesSort.module.css'
 
 const MoviesSort = ({activeSort, callBack}) => {
 
-	console.log(activeSort)
-
 	function buttonClick(button) {
 		callBack(button)
 	}

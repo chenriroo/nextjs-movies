@@ -95,8 +95,12 @@ button {
 }
 
 button:hover {
-	background-color: rgba(255, 255, 255, 0.25);
+	background-color: rgba(255, 255, 255, 0.4);
 	color: #deeefd;
+}
+
+button:active {
+	background-color: rgba(255, 255, 255, 0.5);
 }
 
 .buttonActive {

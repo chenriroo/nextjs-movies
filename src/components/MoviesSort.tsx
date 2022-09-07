@@ -9,19 +9,19 @@ const MoviesSort = ({activeSort, callBack}) => {
 	return (
 		<div className={styles.container}>
 			<button
-			className={activeSort === 'recent' ? 'buttonActive' : ''}
+			className={`button-alt ${activeSort === 'recent' ? 'button-alt-active' : ''}`}
 			onClick={() => buttonClick('recent')}>
 				Recent
 			</button>
 
 			<button
-			className={activeSort ==='top-rated' ? 'buttonActive' : '' }
+			className={`button-alt ${activeSort === 'top-rated' ? 'button-alt-active' : ''}`}
 			onClick={() => buttonClick('top-rated')}>
 				Top Rated
 			</button>
 
 			<button
-			className={activeSort ==='upcoming' ? 'buttonActive' : '' }
+			className={`button-alt ${activeSort === 'upcoming' ? 'button-alt-active' : ''}`}
 			onClick={() => buttonClick('upcoming')}>
 				Upcoming
 			</button>

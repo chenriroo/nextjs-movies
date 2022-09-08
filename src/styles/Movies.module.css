@@ -8,7 +8,7 @@
 
 .contentWrap {
 	display: grid;
-	grid-template-columns: 220px 645px;
+	grid-template-columns: 220px 642px;
 	grid-template-rows: 70px 1fr;
 	width: 950px;
 	z-index: 100;
@@ -20,7 +20,7 @@
 	grid-column: 1/2;
 	grid-row: 2/3;
 	flex: 0 0 12rem;;
-	background: linear-gradient(rgb(78, 97, 116),rgb(75, 93, 112));
+	background: linear-gradient(rgb(78, 97, 116),rgb(63, 77, 92));
 	border-radius: 2px;
 	padding: 15px;
 	box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.4);
@@ -33,7 +33,7 @@
 	display: flex;
 	flex-flow: column;
 	flex: 0 0 600px;
-	background: linear-gradient(rgb(78, 97, 116),rgb(75, 93, 112));
+	background: linear-gradient(rgb(78, 97, 116),rgb(63, 77, 92));
 	border-radius: 2px 2px 2px 0;
 	padding: 0 21px 21px 21px;
 }

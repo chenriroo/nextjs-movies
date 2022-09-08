@@ -27,8 +27,8 @@
 	grid-template-areas: "left right right right";
 	grid-template-columns: 100px auto 25% 25%;
 	grid-template-rows: auto;
-	background: linear-gradient(#456,rgb(63, 79, 95));
-	border-radius: 4px;
+	background: linear-gradient(#464f58,rgb(62 70 78));
+	border-radius: 3px;
 	box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 	z-index:0;
 	transition: 
@@ -46,7 +46,7 @@
 	left: -20px;
 	height: 160px;
 	width: 640px;
-	background: linear-gradient(rgb(53, 65, 77),rgb(48, 59, 70));
+	background: linear-gradient(rgb(61, 64, 68),rgb(48, 51, 53));
 	grid-template-columns: 285px auto 25% 25%;
 	z-index: 100;
 	transition: 

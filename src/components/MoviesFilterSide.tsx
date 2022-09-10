@@ -25,7 +25,10 @@ const MoviesFilterSide = ({ name, options, handleFilters, state  }) => {
 
 	return (
 	<div className={styles.section}>
-		<span className={styles.title} onClick={toggleDisplay}>{name}</span>
+		<div className={styles.header} onClick={toggleDisplay} >
+			<span className={styles.title} >{name}</span>
+			<span className={`${styles.chevron} ${isVisible && styles.chevronDown} `}></span>
+		</div>
 		{
 			state.map(option => {
 				return <li key={option} className={styles.option}>

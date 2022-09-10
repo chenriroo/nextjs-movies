@@ -1,17 +1,50 @@
 .section {
-	margin-top: 20px;
+	margin-top: 15px;
 }
+
+.header {
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+}
+
+.header:hover > .title { color: white; }
 
 .title {
 	font-size: 1.2rem;
-	cursor: pointer;
 	font-weight: bold;
 	text-transform: uppercase;
 }
 
-.title:hover, .option:hover {
+.option:hover {
 	color: white;
 }
+
+.chevron {
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    transform: scale(var(--ggs,1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid transparent;
+    border-radius: 100px;
+}
+.chevron::after {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+    transform: rotate(-45deg);
+    right: 6px;
+    top: 4px
+}
+.chevronDown { transform: rotate(90deg); }
 
 .option {
 	display: flex;
@@ -34,6 +67,5 @@
 	border-left: 3px solid rgba(255, 166, 0, 0.7);
 	padding: 0px 0 0px 7px;
 }
-
 
 

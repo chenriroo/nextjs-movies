@@ -3,23 +3,21 @@ import { db } from "../../lib/firebaseAdmin"
 
 export default async function handler(req, res) {
 
-
-	let movies, arrGenre, arrRating, arrDecade
+	let arrGenre, arrDecade
+	let movies = [];
 	const query = req.query;
 	const colRef = db.collection('movies');
 
 	if(query.genre) arrGenre = query.genre.split(' ');
-	if(query.rating) arrRating = query.rating.split(' ');
 	if(query.decade) arrDecade = query.decade.split(' ');
-
 
 	const data = await colRef
 	.where("genre", "array-contains", "action")
 	.get();
 
-	data.forEach(movie => console.log(movie.data()))
+	data.forEach(movie => movies.push(movie.data()));
 
-	return res.status(200).json({ test: 'test' })
+	return res.status(200).json({ movies: movies })
 
 	if(!movies.exists) {
 		return res.status(200).json({ name: 'John Doe' })

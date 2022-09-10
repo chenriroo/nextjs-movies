@@ -2,6 +2,7 @@ import styles from './ItemMovieDetail.module.css'
 import { useState, useRef  } from 'react'
 import { animated, useSpring } from '@react-spring/web'
 import InfoButton from '../InfoButton'
+import Image from 'next/image'
 
 const ItemMovieDetail = ({data}) => {
 	const [isHovered, setHovered] = useState(false)
@@ -10,6 +11,8 @@ const ItemMovieDetail = ({data}) => {
 	const [springDescription, setSpringDescription] = useSpring(() => ({
 		 y: 0,
 	 }))
+
+	 console.log(data)
 
 	function Hover() {
 		setHovered(true);
@@ -44,10 +47,10 @@ const ItemMovieDetail = ({data}) => {
 			<div className={styles.outerContainer}>
 				<div className={`${styles.itemContainer}`} onMouseEnter={() => Hover()} onMouseLeave={() => unHover()} >
 					<div className={styles.HalfLeft}>
-					<div className={styles.poster}></div>
-						{
-							isHovered && <div className={styles.media}>media</div>
-						}
+						<div className={styles.poster}>
+							<Image src={data.imgPoster} alt={`poster-${data.title}`} layout='fill' />
+						</div>
+						{isHovered && <div className={styles.media}>media</div>}
 					</div>
 					<div className={styles.HalfRight} >
 						<div className={styles.title}>

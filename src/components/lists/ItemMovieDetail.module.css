@@ -23,6 +23,7 @@
 	bottom:0;
 	height: 130px;
 	width: 600px;
+	padding: 5px;
 	display: grid;
 	grid-template-areas: "left right right right";
 	grid-template-columns: 100px auto 25% 25%;
@@ -70,8 +71,9 @@
 
 .poster {
 	display: block;
-	height: 130px;
-	width: 100px;
+	position: relative;
+	height: 100%;
+	width: 90px;
 	animation: fadeIn 0.4s;
 }
 .itemContainer:hover > .HalfLeft > .poster { display: none; }
@@ -92,7 +94,6 @@
 	grid-area: right;
 	display: flex;
 	flex-flow: column;
-	padding: 5px;
 }
 
 .containerTitle {

@@ -1,6 +1,6 @@
 @keyframes fadeIn {
 	0% { opacity: 0; }
-	50% { opacity: 0; }
+	30% { opacity: 0; }
 	100% { opacity: 1; }
 }
 
@@ -23,10 +23,9 @@
 	bottom:0;
 	height: 130px;
 	width: 600px;
-	padding: 5px;
 	display: grid;
-	grid-template-areas: "left right right right";
-	grid-template-columns: 100px auto 25% 25%;
+	grid-template-areas: "left right";
+	grid-template-columns: 100px 1fr;
 	grid-template-rows: auto;
 	background: linear-gradient(#464f58,rgb(62 70 78));
 	border-radius: 3px;
@@ -48,7 +47,7 @@
 	height: 160px;
 	width: 640px;
 	background: linear-gradient(rgb(61, 64, 68),rgb(48, 51, 53));
-	grid-template-columns: 285px auto 25% 25%;
+	grid-template-columns: 285px 1fr;
 	z-index: 100;
 	transition: 
 	height .2s ease, 
@@ -60,49 +59,48 @@
 	z-index .0s .0s
 }
 
-
-
-
-
-/*---------------*/
 .HalfLeft {
-	grid-area:left;
-}
-
-.poster {
-	display: block;
 	position: relative;
+	grid-area:left;
 	height: 100%;
-	width: 90px;
-	animation: fadeIn 0.4s;
+	padding: 5px;
 }
-.itemContainer:hover > .HalfLeft > .poster { display: none; }
+.itemContainer:hover .HalfLeft { padding: 0 5px 0 0; }
 
-.media {
-	display: none;
-	height: 160px;
-	width: 100%;
-	animation: fadeIn 0.4s;
-	text-align: center;
-
-}
-.itemContainer:hover > .HalfLeft > .media { display: block; }
-
-/*---------------*/
 .HalfRight {
 	position: relative;
 	grid-area: right;
 	display: flex;
 	flex-flow: column;
+	height: 100%;
+	padding: 10px 0 10px 0;
+	overflow: hidden;
 }
+
+.HalfLeft > .poster {
+	display: block;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	animation: fadeIn 0.2s;
+}
+.itemContainer:hover > .HalfLeft > .poster { display: none; }
+
+.HalfLeft > .media {
+	display: none;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	animation: fadeIn 0.2s;
+}
+.itemContainer:hover > .HalfLeft > .media { display: block; }
 
 .containerTitle {
 	display:flex;
 	justify-content: space-between;
 }
 
-
-.title {
+.HalfRight > .title {
 	font-size: 17px;
 	line-height: 20px;
 	font-weight: 100;
@@ -110,10 +108,18 @@
 	text-transform: uppercase;
 }
 
-.details {
+.HalfRight > .details {
 	display: flex;
 	flex-flow: column;
 }
+
+.HalfRight > .rating {
+	position: absolute;
+	display: block;
+	bottom: 4px;
+    right: 7px;
+}
+.itemContainer:hover > .HalfRight > .rating { display: none; }
 
 .tags {
 	display: flex;
@@ -151,13 +157,4 @@
 	display:block;
 	height: auto;
 }
-
 .itemContainer:hover > .HalfRight > .details > .descContainer { display:block;  }
-
-.rating {
-	position: absolute;
-	display: block;
-	bottom: 4px;
-    right: 7px;
-}
-.itemContainer:hover > .HalfRight > .rating { display: none; }

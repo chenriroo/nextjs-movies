@@ -120,7 +120,7 @@ const Movies = () => {
 	
 	// Later we should retrieve all available genres from existing movies in the database
 	const genres = ['action','animation', 'comedy','drama','fantasy','horror','romance','sciencefiction','thriller','war']
-	const decades = ['70s','80s','90s','00s','10s','20s']
+	const decades = ['1970s','1980s','1990s','2000s','2010s','2020s']
 
 
 	return (

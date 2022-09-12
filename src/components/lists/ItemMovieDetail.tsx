@@ -50,7 +50,11 @@ const ItemMovieDetail = ({data}) => {
 						<div className={styles.poster}>
 							<Image src={data.imgPoster} alt={`poster-${data.title}`} layout='fill' />
 						</div>
-						{isHovered && <div className={styles.media}>media</div>}
+						{isHovered && 
+						<div className={styles.media}>
+							<Image src={data.imgBackground} alt={`media-${data.title}`} layout='fill' />	
+						</div>
+						}
 					</div>
 					<div className={styles.HalfRight} >
 						<div className={styles.title}>

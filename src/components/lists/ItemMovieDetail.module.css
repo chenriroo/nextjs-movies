@@ -27,7 +27,7 @@
 	grid-template-areas: "left right";
 	grid-template-columns: 100px 1fr;
 	grid-template-rows: auto;
-	background: linear-gradient(#464f58,rgb(62 70 78));
+	background: linear-gradient(#414a55,#3d4751);
 	border-radius: 3px;
 	box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 	z-index:0;
@@ -46,7 +46,7 @@
 	left: -20px;
 	height: 160px;
 	width: 640px;
-	background: linear-gradient(rgb(61, 64, 68),rgb(48, 51, 53));
+	background: linear-gradient(#2f3239,#292c32);
 	grid-template-columns: 285px 1fr;
 	z-index: 100;
 	transition: 
@@ -73,7 +73,7 @@
 	display: flex;
 	flex-flow: column;
 	height: 100%;
-	padding: 10px 0 10px 0;
+	padding: 10px 0 10px 5px;
 	overflow: hidden;
 }
 
@@ -142,6 +142,11 @@
 
 .date {
 	display: block;
+	margin-top: 5px;
+	letter-spacing: 1px;
+	font-size: 15px;
+	text-transform: uppercase;
+	color:rgb(181 187 209);
 }
 .itemContainer:hover > .HalfRight > .details > .date { display: none; }
 
@@ -156,5 +161,6 @@
 .descText {
 	display:block;
 	height: auto;
+	color:rgb(181 187 209);
 }
 .itemContainer:hover > .HalfRight > .details > .descContainer { display:block;  }

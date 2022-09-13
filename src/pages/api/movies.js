@@ -39,7 +39,7 @@ export default async function handler(req, res) {
 
 
 
-	data.forEach(movie => movies.push(movie.data()));
+	data.forEach(doc => movies.push({ id: doc.id , ... doc.data() }));
 
 	return res.status(200).json({ movies: movies })
 

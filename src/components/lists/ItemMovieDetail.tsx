@@ -3,6 +3,7 @@ import { useState, useRef  } from 'react'
 import { animated, useSpring } from '@react-spring/web'
 import InfoButton from '../InfoButton'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const ItemMovieDetail = ({data}) => {
 	const [isHovered, setHovered] = useState(false)
@@ -45,7 +46,9 @@ const ItemMovieDetail = ({data}) => {
 	return (
 		<div className={styles.itemRow}>
 			<div className={styles.outerContainer}>
-				<div className={`${styles.itemContainer}`} onMouseEnter={() => Hover()} onMouseLeave={() => unHover()} >
+				<div className={`${styles.itemContainer}`} 
+				onMouseEnter={() => Hover()} 
+				onMouseLeave={() => unHover()}>
 					<div className={styles.HalfLeft}>
 						<div className={styles.poster}>
 							<Image src={data.imgPoster} alt={`poster-${data.title}`} layout='fill' />
@@ -58,11 +61,13 @@ const ItemMovieDetail = ({data}) => {
 					</div>
 					<div className={styles.HalfRight} >
 						<div className={styles.title}>
-							<a href='#'>
-								<div>
-									{data.title}
-								</div>
-							</a>
+							<Link href={`/movie/${encodeURIComponent(data.id)}`} passHref={true} >
+								<a href='#'>
+									<div>
+										{data.title}
+									</div>
+								</a>
+							</Link>
 						</div>
 
 						<div className={styles.details}>

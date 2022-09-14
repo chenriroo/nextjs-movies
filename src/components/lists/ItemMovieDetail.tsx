@@ -13,8 +13,6 @@ const ItemMovieDetail = ({data}) => {
 		 y: 0,
 	 }))
 
-	 console.log(data)
-
 	function Hover() {
 		setHovered(true);
 		const el = refElementDescription.current;
@@ -82,12 +80,12 @@ const ItemMovieDetail = ({data}) => {
 							</div>
 
 							<div className={styles.descContainer}>
-									<animated.div
-									className={styles.descText}
-									ref={refElementDescription}
-									style={springDescription}>
-									{dataDescription}
-									</animated.div>
+								<animated.div
+								className={styles.descText}
+								ref={refElementDescription}
+								style={springDescription}>
+								{dataDescription}
+								</animated.div>
 							</div>
 
 						</div>

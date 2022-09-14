@@ -22,13 +22,16 @@ export default async function handler(req, res) {
 
 
 
-	if(arrGenre) {
+	if(arrGenre && arrDecade) {
+		data = await colRef
+		.where("genre", "array-contains-any", arrGenre)
+		.get();
+	} else if (arrGenre) {
 		data = await colRef
 		.where("genre", "array-contains-any", arrGenre)
 		.get();
 	} else if (arrDecade) {
 		data = await colRef
-		.where("year", "array-contains-any", arrGenre)
 		.get();
 	} else {
 		data = await colRef

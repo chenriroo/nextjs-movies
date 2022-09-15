@@ -158,8 +158,8 @@ const Movies = () => {
 							}
 						</div>
 						
-						<MoviesFilterSide name='Genre' options={genres} handleFilters={handleFilters} state={state.genre} />
-						<MoviesFilterSide name='Decade' options={decades} handleFilters={handleFilters} state={state.decade}/>
+						<MoviesFilterSide name='Genre' options={genres} handleFilters={handleFilters} state={state.genre} activeLimit={3}/>
+						<MoviesFilterSide name='Decade' options={decades} handleFilters={handleFilters} state={state.decade} activeLimit={1} />
 					</section>
 					
 					<section id={styles.right}>

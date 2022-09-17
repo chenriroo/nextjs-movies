@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Alert from "./Alert";
 import styles from "./MoviesFilterSide.module.css"
 
 const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit  }) => {
@@ -14,14 +15,21 @@ const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit  })
 	})
 
 	useEffect(() => {
-		console.log(state.length, activeLimit)
 		if(state.length === activeLimit) {
-			setLimitReached(true) 
+			setLimitReached(true)
 		} else {
 			setLimitReached(false)
 			setDisplayLimitReached(false)
 		}
 	},[state.length, activeLimit])
+
+	useEffect(() => {
+		if(displayLimitReached === true) {
+			setTimeout(() => {
+				setDisplayLimitReached(false);
+			},2000)
+		} else return
+	})
 
 	function toggleDisplay() {
 		setVisibility(!isVisible)
@@ -44,8 +52,10 @@ const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit  })
 
 	return (
 	<div className={styles.section}>
-		<div className={styles.header} onClick={toggleDisplay} >
-			{displayLimitReached && <div>asdfsdf</div>}
+		<div className={styles.header} onClick={toggleDisplay}>
+			{displayLimitReached && <Alert 
+			text={`Limit: ${activeLimit}`}
+			position='cover' />}
 			<span className={styles.title} >{name}</span>
 			<span className={`${styles.chevron} ${isVisible && styles.chevronDown}`}></span>
 		</div>

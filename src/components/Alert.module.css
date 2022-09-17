@@ -1,0 +1,43 @@
+@keyframes fadeIn {
+	0% { opacity: 0;  }
+	50% { opacity: 1; }
+	100% { opacity: 0; }
+}
+
+@keyframes slideIn {
+	0% { width: 0%; opacity:0; }
+	20% { width: 100%; opacity: 1; }
+	80% { width: 100%; opacity: 1; }
+	100% { width: 0%; opacity: 0; }
+}
+
+.alert {
+	display: inline-block;
+	position: absolute;
+    font-size: 14px;
+    padding: 2px 8px;
+	border-radius: 2px;
+	background-color: #e9dbc2;
+    color: #ab7207;
+	opacity: 0;
+}
+
+.alert > span {
+	animation: fadeIn 0.2s;
+	white-space: nowrap;
+}
+
+.cover {
+	width: 0%;
+	animation: slideIn 2s;
+}
+
+.top {
+	top: -20px;
+	animation: fadeIn 0.2s;
+}
+
+.bottom {
+	top: 20px;
+	animation: fadeIn 0.2s;
+}

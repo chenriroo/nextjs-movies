@@ -36,18 +36,26 @@ const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit  })
 	}
 
 	function handleCheckbox(e) {
-		if(limitReached) {
-			setDisplayLimitReached(true)
-			return
-		}
 		const el = e.target;
-		if(!limitReached) {
-			handleFilters({
-				entry: `${name.toLowerCase()}-${el.name}`,
-				checked: el.checked
-			})
-		}
-
+		if(limitReached) {
+			if(state.includes(el.name)) {
+				handleFilters({
+					entry: `${name.toLowerCase()}-${el.name}`,
+					checked: el.checked
+				})
+				return
+			} else {
+				setDisplayLimitReached(true)
+				return
+			}
+		} else {
+			if(!limitReached) {
+				handleFilters({
+					entry: `${name.toLowerCase()}-${el.name}`,
+					checked: el.checked
+				})
+			}	
+		}	
 	}
 
 	return (

@@ -9,35 +9,50 @@ import Layout from "../../components/Layout"
 import useSWRInfinite from "swr"
 import InfoButton from "../../components/InfoButton"
 import { takeCoverage } from "v8"
+import { off } from "process"
 
 const fetcher = url => fetch(url).then(r => r.json())
 
 // filter On / Off
 function helperReducer(arrState, action) {
-	let arr = arrState;
-	if(action.payload.checked) {
-		arr.push(action.payload.value)
-	} else {
-		arr = arr.filter(el => el !== action.payload.value)
-	}
-	return arr 
+		let arr = arrState;
+
+		if(action.payload.checked) {
+			arr.push(action.payload.value)
+		} else {
+			arr = arr.filter(el => el !== action.payload.value)
+		}
+		return arr 
 }
 
-function helperQuery(arr,type) {
-	let output
+function generateAPIURL(state) {
+	let urlGenre, urlDecade, url
+	const keys = Object.keys(state)
+	let arr = []
 
-	if(type === 'rating') {
+	keys.forEach((key) => {
+		let output
+		if(typeof state[key] === 'string') {
+			output = state[key].length >= 5 ? state[key] : undefined
+		} else if(Array.isArray(state[key])) {
+			output = state[key].length > 1 ? state[key].map(el => el).join('+') : state[key][0]
+		}
 
+		if(output) arr.push(`${key}=${output}`)
+	})
 
-		return
-	} else if(arr.length > 1) {
-		output = arr.map(el => el).join('+')
-		return `${type}=${output}`
+	if(arr.length > 1) {
+		let foo = arr.map((el) => el).join('&')
+		url = `/api/movies?${foo}`
 	} else if(arr.length === 1) {
-		return `${type}=${arr[0]}`
+		url = `/api/movies?${arr[0]}`
 	} else {
-		return ''
+		url = `/api/movies`
 	}
+
+	console.log(url)
+
+	return url
 }
 
 function reducer(state, action) {
@@ -67,9 +82,9 @@ function reducer(state, action) {
 }
 
 const initialState = {
-	title: '',
+	title: 'aaaaaa',
 	genre: [],
-	decade: []
+	decade: [],
 }
 
 const Movies = () => {
@@ -77,16 +92,15 @@ const Movies = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 	const [activeSort, setActiveSort] = useState('');
 
-	const urlGenre = helperQuery(state.genre, 'genre')
-	const urlDecade = helperQuery(state.decade, 'decade')
+	// const url = `/api/movies?${urlGenre}&${urlDecade}`
+	const { data: searchData, error: searchError } = useSWRInfinite(generateAPIURL(state), fetcher);
 
-	
-
-	const url = `/api/movies?${urlGenre}&${urlDecade}`
-	const { data: searchData, error: searchError } = useSWRInfinite(url, fetcher);
-
-	console.log({activeSort, url})
+	// console.log({state, activeSort, url})
 	// console.log(searchData)
+
+
+
+
 
 	function handleSortInput(button) {
 		if(activeSort === button) {
@@ -97,13 +111,15 @@ const Movies = () => {
 	}
 
 	function handleFilters(data) {
-		const filterType = data.entry.split('-')[0];
+		let entrySanitized = data.entry;
+		if(data.type === 'decade') entrySanitized = data.entry.slice(0,4)
 
 		dispatch({
-			type: filterType,
+			type: data.type,
 			payload: {
 				checked: data.checked, 
-				value: data.entry.split('-')[1]
+				value: data.entry,
+				valueAPI: entrySanitized
 			}
 		})
 	}

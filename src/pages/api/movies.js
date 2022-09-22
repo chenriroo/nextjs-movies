@@ -3,7 +3,7 @@ import { db } from "../../lib/firebaseAdmin"
 
 export default async function handler(req, res) {
 
-
+	// Start ---  return placeholder for testing
 	const placeholderData = [
 		{
 			id: 'Toy-Story-3-535',
@@ -18,10 +18,8 @@ export default async function handler(req, res) {
 			tagline: 'No toy gets left behind'
 		}
 	]
-
-
 	return res.status(200).json({ movies:placeholderData  })
-	return
+	// End ---  return placeholder for testing
 
 	let arrGenre, arrDecade
 	let movies = [];
@@ -38,9 +36,6 @@ export default async function handler(req, res) {
 	console.log(query.genre)
 	console.log(arrGenre)
 	console.log(arrDecade)
-
-
-
 
 	if(arrGenre && arrDecade) {
 		data = await colRef

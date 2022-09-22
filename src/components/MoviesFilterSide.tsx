@@ -40,7 +40,8 @@ const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit  })
 		if(limitReached) {
 			if(state.includes(el.name)) {
 				handleFilters({
-					entry: `${name.toLowerCase()}-${el.name}`,
+					type: name.toLowerCase(),
+					entry: el.name,
 					checked: el.checked
 				})
 				return
@@ -51,7 +52,8 @@ const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit  })
 		} else {
 			if(!limitReached) {
 				handleFilters({
-					entry: `${name.toLowerCase()}-${el.name}`,
+					type: name.toLowerCase(),
+					entry: el.name,
 					checked: el.checked
 				})
 			}	

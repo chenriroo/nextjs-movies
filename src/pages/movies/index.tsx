@@ -50,8 +50,6 @@ function generateAPIURL(state) {
 		url = `/api/movies`
 	}
 
-	console.log(url)
-
 	return url
 }
 
@@ -82,7 +80,7 @@ function reducer(state, action) {
 }
 
 const initialState = {
-	title: 'aaaaaa',
+	title: '',
 	genre: [],
 	decade: [],
 }
@@ -91,15 +89,10 @@ const Movies = () => {
 	const [displayCovers, setDisplayCover] = useState(true);
 	const [state, dispatch] = useReducer(reducer, initialState);
 	const [activeSort, setActiveSort] = useState('');
-
-	// const url = `/api/movies?${urlGenre}&${urlDecade}`
 	const { data: searchData, error: searchError } = useSWRInfinite(generateAPIURL(state), fetcher);
 
-	// console.log({state, activeSort, url})
+	// console.log({state, activeSort})
 	// console.log(searchData)
-
-
-
 
 
 	function handleSortInput(button) {

@@ -2,8 +2,57 @@ import { database } from "firebase-admin";
 import { db } from "../../lib/firebaseAdmin"
 
 export default async function handler(req, res) {
+	let inputTitle, inputGenre, inputDecadeStart, inputDecadeEnd
+	let movies = [];
+	let data
+	const query = req.query;
+	const arrQuery = []
 
-	// Start ---  return placeholder for testing
+	if(query.title) inputTitle = query.Title;
+	if(query.genre) inputGenre = query.genre.split(' ');
+	if(query.decade) inputDecadeStart = Number(query.decade.slice(0,4));
+	if(query.decade) inputDecadeEnd = inputDecadeStart + 9;
+	
+	const colRef = db.collection('movies')
+
+	if(inputTitle & inputGenre & inputDecadeStart) {
+		data = await colRef
+		.where("genre", "array-contains-any", inputGenre)
+			.get()
+	} else if(inputTitle & inputGenre) {
+		data = await colRef
+		.where("genre", "array-contains-any", inputGenre)
+			get()
+	} else if(inputTitle & inputDecadeStart) {
+		data = await colRef
+			.get()
+	} else if(inputGenre & inputDecadeStart) {
+		data = await colRef
+			.where("genre", "array-contains-any", inputGenre)
+			.where("year", ">=", inputDecadeStart)
+			.where("year", "<=", inputDecadeEnd)
+			.get()
+	} else if(inputGenre) {
+		data = await colRef
+			.where("genre", "array-contains-any", inputGenre)
+			.get()
+	} else if(inputDecadeStart) {
+		data = await colRef
+			.where("year", ">=", inputDecadeStart)
+			.where("year", "<=", inputDecadeEnd)
+			.get()
+	} else {
+		data = await colRef.get()
+	}
+
+	data.forEach(doc => movies.push({ id: doc.id , ...doc.data() }));
+
+	//console.log(movies)
+
+	return res.status(200).json({ movies: movies });
+
+
+// Start ---  return placeholder for testing without querying firestore
 	const placeholderData = [
 		{
 			id: 'Toy-Story-3-535',
@@ -20,40 +69,6 @@ export default async function handler(req, res) {
 	]
 	return res.status(200).json({ movies:placeholderData  })
 	// End ---  return placeholder for testing
-
-	let arrGenre, arrDecade
-	let movies = [];
-	let data
-	const query = req.query;
-	const colRef = db.collection('movies');
-
-	if(query.genre) arrGenre = query.genre.split(' ');
-	if(query.decade) arrDecade = query.decade.split(' ');
-
-	// console.log({query, arrGenre, arrDecade})
-
-	console.log('-----------------------------')
-	console.log(query.genre)
-	console.log(arrGenre)
-	console.log(arrDecade)
-
-	if(arrGenre && arrDecade) {
-		data = await colRef
-		.where("genre", "array-contains-any", arrGenre)
-		.get();
-	} else if (arrGenre) {
-		data = await colRef
-		.where("genre", "array-contains-any", arrGenre)
-		.get();
-	} else if (arrDecade) {
-		data = await colRef
-		.get();
-	} else {
-		data = await colRef
-		.get();
-	}
-
-
 
 
 

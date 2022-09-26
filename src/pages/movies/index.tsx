@@ -50,6 +50,8 @@ function generateAPIURL(state) {
 		url = `/api/movies`
 	}
 
+	console.log(url)
+
 	return url
 }
 

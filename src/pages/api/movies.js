@@ -6,42 +6,54 @@ export default async function handler(req, res) {
 	let movies = [];
 	let data
 	const query = req.query;
-	const arrQuery = []
 
 	if(query.title) inputTitle = query.Title;
 	if(query.genre) inputGenre = query.genre.split(' ');
-	if(query.decade) inputDecadeStart = Number(query.decade.slice(0,4));
-	if(query.decade) inputDecadeEnd = inputDecadeStart + 9;
+	if(query.decade) {
+		inputDecadeStart = Number(query.decade.slice(0,4));  
+		inputDecadeEnd = inputDecadeStart + 9
+	}
 	
 	const colRef = db.collection('movies')
 
-	if(inputTitle & inputGenre & inputDecadeStart) {
+	if(inputTitle & inputGenre && inputDecadeStart) {
+		console.log('title + genre + decade')
 		data = await colRef
-		.where("genre", "array-contains-any", inputGenre)
+			.where("genre", "array-contains-any", inputGenre)
+			.where("year", ">=", inputDecadeStart)
+			.where("year", "<=", inputDecadeEnd)
 			.get()
-	} else if(inputTitle & inputGenre) {
+	} else if(inputTitle && inputGenre) {
+		console.log('title + genre')
 		data = await colRef
-		.where("genre", "array-contains-any", inputGenre)
+			.where("genre", "array-contains-any", inputGenre)
 			get()
-	} else if(inputTitle & inputDecadeStart) {
+	} else if(inputTitle && inputDecadeStart) {
+		console.log('title + decade')
 		data = await colRef
+			.where("year", ">=", inputDecadeStart)
+			.where("year", "<=", inputDecadeEnd)
 			.get()
-	} else if(inputGenre & inputDecadeStart) {
+	} else if(inputGenre && inputDecadeStart) {
+		console.log('genre + decade')
 		data = await colRef
 			.where("genre", "array-contains-any", inputGenre)
 			.where("year", ">=", inputDecadeStart)
 			.where("year", "<=", inputDecadeEnd)
 			.get()
 	} else if(inputGenre) {
+		console.log('genre')
 		data = await colRef
 			.where("genre", "array-contains-any", inputGenre)
 			.get()
 	} else if(inputDecadeStart) {
+		console.log('decade')
 		data = await colRef
 			.where("year", ">=", inputDecadeStart)
 			.where("year", "<=", inputDecadeEnd)
 			.get()
 	} else {
+		console.log('no filter')
 		data = await colRef.get()
 	}
 

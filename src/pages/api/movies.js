@@ -13,12 +13,16 @@ export default async function handler(req, res) {
 		inputDecadeStart = Number(query.decade.slice(0,4));  
 		inputDecadeEnd = inputDecadeStart + 9
 	}
+
+	console.log({inputTitle, inputGenre, inputDecadeStart})
 	
+	/*
 	const colRef = db.collection('movies')
 
 	if(inputTitle & inputGenre && inputDecadeStart) {
 		console.log('title + genre + decade')
 		data = await colRef
+			.where("titleTags", "array-contains-any", inputTitle)
 			.where("genre", "array-contains-any", inputGenre)
 			.where("year", ">=", inputDecadeStart)
 			.where("year", "<=", inputDecadeEnd)
@@ -26,11 +30,13 @@ export default async function handler(req, res) {
 	} else if(inputTitle && inputGenre) {
 		console.log('title + genre')
 		data = await colRef
+			.where("titleTags", "array-contains-any", inputTitle)
 			.where("genre", "array-contains-any", inputGenre)
 			get()
 	} else if(inputTitle && inputDecadeStart) {
 		console.log('title + decade')
 		data = await colRef
+			.where("titleTags", "array-contains-any", inputTitle)
 			.where("year", ">=", inputDecadeStart)
 			.where("year", "<=", inputDecadeEnd)
 			.get()
@@ -40,6 +46,11 @@ export default async function handler(req, res) {
 			.where("genre", "array-contains-any", inputGenre)
 			.where("year", ">=", inputDecadeStart)
 			.where("year", "<=", inputDecadeEnd)
+			.get()
+	} else if(inputTitle) {
+		console.log('title')
+		data = await colRef
+			.where("titleTags", "array-contains-any", inputTitle)
 			.get()
 	} else if(inputGenre) {
 		console.log('genre')
@@ -62,6 +73,8 @@ export default async function handler(req, res) {
 	//console.log(movies)
 
 	return res.status(200).json({ movies: movies });
+
+	*/
 
 
 // Start ---  return placeholder for testing without querying firestore

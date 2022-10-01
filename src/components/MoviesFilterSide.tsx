@@ -62,7 +62,7 @@ const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit  })
 
 	return (
 	<div className={styles.section}>
-		<div className={styles.header} onClick={toggleDisplay}>
+		<div className={ [styles.header, styles.headerClickable].join(' ') } onClick={toggleDisplay}>
 			{displayLimitReached && <Alert 
 			text={`Limit: ${activeLimit}`}
 			position='cover' />}

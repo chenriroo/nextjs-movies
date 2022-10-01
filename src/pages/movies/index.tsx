@@ -4,6 +4,7 @@ import { useState, useEffect, useReducer } from "react"
 import TopMenu from "../../components/TopMenu"
 import MoviesSort from "../../components/MoviesSort"
 import MoviesFilterSide from "../../components/MoviesFilterSide"
+import MoviesFilterText from "../../components/MoviesFilterText"
 import SingleLine from "../../components/lists/SingleLine"
 import Layout from "../../components/Layout"
 import useSWRInfinite from "swr"
@@ -59,10 +60,9 @@ function reducer(state, action) {
 	let arr
 	switch(action.type) {
 		case "title":
-			arr = helperReducer(state.title, action)
 			return {
 				...state,
-				title: arr
+				title: action.payload.value
 			};
 		case "genre":
 			arr = helperReducer(state.genre, action)
@@ -119,6 +119,17 @@ const Movies = () => {
 		})
 	}
 
+	function handleSearchTitle(inputString) {
+		console.log(inputString)
+
+		dispatch({
+			type: 'title',
+			payload: {
+				value: inputString
+			}
+		})
+	}
+
 	function deleteFilter(tag,type) {
 		dispatch({
 			type: type,
@@ -169,6 +180,7 @@ const Movies = () => {
 							}
 						</div>
 						
+						<MoviesFilterText name='Title' callback={handleSearchTitle} state={state.title}/>
 						<MoviesFilterSide name='Genre' options={genres} handleFilters={handleFilters} state={state.genre} activeLimit={3}/>
 						<MoviesFilterSide name='Decade' options={decades} handleFilters={handleFilters} state={state.decade} activeLimit={1} />
 					</section>

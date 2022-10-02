@@ -3,11 +3,22 @@ import Alert from "./Alert"
 import styles from "./MoviesFilterSide.module.css"
 
 const MoviesFilterText = ({name, callback, state}) => {
-	const [displayAlert, setAlert] = useState(false)
+	const [displayAlert, setAlert] = useState(false);
+	const [filterIsActive, setFilterActive] = useState(false)
 
 	function handleKeystroke(e) {
 		const input = e.target.value;
-		callback(input)
+		if(input.length > 4) {
+			setFilterActive(true)
+			callback(e.target.value)
+		} else {
+			setFilterActive(false)
+			callback('')
+		}
+	}
+
+	function handleButtonRemove() {
+		callback('')
 	}
 
 	return (
@@ -18,9 +29,21 @@ const MoviesFilterText = ({name, callback, state}) => {
 			position='cover' />}
 			<span className={styles.title}>{name}</span>
 			</div>
-			<input type="text" className={styles.inputText} placeholder='Search title' onChange={handleKeystroke}>
+			<div className={[styles.rowInput, filterIsActive ? styles.rowActive : ''].join(' ')}>
+				<input type="text" className={styles.inputText} placeholder='Search title' onChange={handleKeystroke}></input>
 
-			</input>
+				<button
+				onClick={handleButtonRemove}
+				className={[filterIsActive ? '' : styles.inactive, styles.btnTitle].join(' ')}
+				>
+					{filterIsActive ?
+					'X'
+					:
+					'...'	
+				}
+				</button>
+
+			</div>
 		</div>
 	)
 }

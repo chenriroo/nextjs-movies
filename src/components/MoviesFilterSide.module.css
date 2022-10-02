@@ -74,11 +74,17 @@
 
 
 /* Text */
+.rowInput {
+	display: flex;
+	border-left: 3px solid rgba(255, 166, 0, 0.0);
+}
+.rowActive { border-left: 3px solid rgba(255, 166, 0, 0.7); }
+
 .inputText {
 	padding: 8px;
 	width: 100%;
 	background-color: #414a55;
-	border-radius: 2px;
+	border-radius: 2px 0 0 2px;
 	border: none;
 	color: rgb(211, 211, 211);
 	transition: box-shadow 0.3s;;
@@ -90,12 +96,15 @@
 	box-shadow: inset 1px 1px 6px 1px rgba(0, 0, 0, 0.3);
 }
 
-.inputTextConfirm {
-	display: block;
-}
-
-.inputTextDelete {
-	display: block;
+.btnTitle {
+	border-radius: 0 2px 2px 0;
+	transition: all 0.2s;
 }
 
 /* Radiobutton */
+
+
+
+/* general */
+.inactive { background-color: rgba(0, 0, 0, 0.1); cursor: default; }
+.inactive:hover { background-color: rgba(0, 0, 0, 0.1); }

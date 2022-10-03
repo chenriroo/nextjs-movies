@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Alert from "./Alert"
 import styles from "./MoviesFilterSide.module.css"
 
@@ -6,19 +6,15 @@ const MoviesFilterText = ({name, callback, state}) => {
 	const [displayAlert, setAlert] = useState(false);
 	const [filterIsActive, setFilterActive] = useState(false)
 
-	function handleKeystroke(e) {
+	function handleInput(e) {
 		const input = e.target.value;
-		if(input.length > 4) {
-			setFilterActive(true)
-			callback(e.target.value)
-		} else {
-			setFilterActive(false)
-			callback('')
-		}
+		input.length > 4 ? setFilterActive(true) : setFilterActive(false);
+		callback(input);
 	}
 
 	function handleButtonRemove() {
-		callback('')
+		callback('');
+		setFilterActive(false);
 	}
 
 	return (
@@ -30,8 +26,13 @@ const MoviesFilterText = ({name, callback, state}) => {
 			<span className={styles.title}>{name}</span>
 			</div>
 			<div className={[styles.rowInput, filterIsActive ? styles.rowActive : ''].join(' ')}>
-				<input type="text" className={styles.inputText} placeholder='Search title' onChange={handleKeystroke}></input>
-
+				<input 
+				type="text" 
+				className={styles.inputText} 
+				placeholder='Search title' 
+				value={state}
+				onChange={handleInput}
+				/>
 				<button
 				onClick={handleButtonRemove}
 				className={[filterIsActive ? '' : styles.inactive, styles.btnTitle].join(' ')}

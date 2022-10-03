@@ -34,7 +34,7 @@ function generateAPIURL(state) {
 	keys.forEach((key) => {
 		let output
 		if(typeof state[key] === 'string') {
-			output = state[key].length >= 5 ? state[key] : undefined
+			output = state[key].length >= 4 ? state[key] : undefined
 		} else if(Array.isArray(state[key])) {
 			output = state[key].length > 1 ? state[key].map(el => el).join('+') : state[key][0]
 		}
@@ -96,6 +96,8 @@ const Movies = () => {
 	// console.log({state, activeSort})
 	// console.log(searchData)
 
+	console.log(state)
+
 
 	function handleSortInput(button) {
 		if(activeSort === button) {
@@ -120,8 +122,6 @@ const Movies = () => {
 	}
 
 	function handleSearchTitle(inputString) {
-		console.log(inputString)
-
 		dispatch({
 			type: 'title',
 			payload: {

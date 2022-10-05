@@ -1,10 +1,15 @@
 import styles from './Alert.module.css'
-import { useEffect, useState } from 'react'
 
-const Alert = ({text, position}) => {
+const Alert = ({text, type}) => {
 
 	return (
-		<div className={`${styles.alert} ${styles.cover} `}>
+		<div 
+		className={[
+			styles.alert, 
+			type === 'cover' && styles.cover,
+			type === 'popup' && styles.popup
+		].join(' ')}
+		>
 			<span>{text}</span>
 		</div>
 	)

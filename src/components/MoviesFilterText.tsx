@@ -17,12 +17,20 @@ const MoviesFilterText = ({name, callback, state}) => {
 		setFilterActive(false);
 	}
 
+	function handleMouseEnter() {
+		if(filterIsActive) return
+		setAlert(true)
+	}
+
+	function handleMouseLeave() {
+		if(filterIsActive) return
+		setAlert(false)
+	}
+
 	return (
 		<div className={styles.section}>
 			<div className={styles.header}>
-			{displayAlert && <Alert 
-			text={`Alert`}
-			position='cover' />}
+
 			<span className={styles.title}>{name}</span>
 			</div>
 			<div className={[styles.rowInput, filterIsActive ? styles.rowActive : ''].join(' ')}>
@@ -35,18 +43,22 @@ const MoviesFilterText = ({name, callback, state}) => {
 				/>
 				<button
 				onClick={handleButtonRemove}
+				onMouseEnter={handleMouseEnter}
+				onMouseLeave={handleMouseLeave}
 				className={[filterIsActive ? '' : styles.inactive, styles.btnTitle].join(' ')}
 				>
 					{filterIsActive ?
 					'X'
 					:
-					'...'	
+					'...'
 				}
 				</button>
+				{displayAlert && <Alert 
+				text={`4 characters minimum`}
+				type='popup' />}
 
 			</div>
 		</div>
 	)
 }
-
 export default MoviesFilterText

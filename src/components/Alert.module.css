@@ -1,6 +1,10 @@
 @keyframes fadeIn {
 	0% { opacity: 0;  }
-	50% { opacity: 1; }
+	100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+	0% { opacity: 1; }
 	100% { opacity: 0; }
 }
 
@@ -19,7 +23,7 @@
 	border-radius: 2px;
 	background-color: #e9dbc2;
     color: #ab7207;
-	opacity: 0;
+	
 }
 
 .alert > span {
@@ -28,16 +32,12 @@
 }
 
 .cover {
+	opacity: 0;
 	width: 0%;
 	animation: slideIn 2s;
 }
 
-.top {
+.popup {
 	top: -20px;
-	animation: fadeIn 0.2s;
-}
-
-.bottom {
-	top: 20px;
-	animation: fadeIn 0.2s;
+	animation: fadeIn 0.4s;
 }

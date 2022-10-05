@@ -180,9 +180,22 @@ const Movies = () => {
 							}
 						</div>
 						
-						<MoviesFilterText name='Title' callback={handleSearchTitle} state={state.title}/>
-						<MoviesFilterSide name='Genre' options={genres} handleFilters={handleFilters} state={state.genre} activeLimit={3}/>
-						<MoviesFilterSide name='Decade' options={decades} handleFilters={handleFilters} state={state.decade} activeLimit={1} />
+						<MoviesFilterText 
+							name='Title' 
+							callback={handleSearchTitle} 
+							state={state.title}/>
+						<MoviesFilterSide
+							name='Genre'
+							options={genres}
+							handleFilters={handleFilters}
+							state={state.genre}
+							activeLimit={3}/>
+						<MoviesFilterSide 
+							name='Decade' 
+							options={decades} 
+							handleFilters={handleFilters} 
+							state={state.decade} 
+							activeLimit={1} />
 					</section>
 					
 					<section id={styles.right}>

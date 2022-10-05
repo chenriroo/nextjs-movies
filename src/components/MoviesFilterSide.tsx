@@ -65,7 +65,7 @@ const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit  })
 		<div className={ [styles.header, styles.headerClickable].join(' ') } onClick={toggleDisplay}>
 			{displayLimitReached && <Alert 
 			text={`Limit: ${activeLimit}`}
-			position='cover' />}
+			type='cover' />}
 			<span className={styles.title} >{name}</span>
 			<span className={`${styles.chevron} ${isVisible && styles.chevronDown}`}></span>
 		</div>

@@ -7,15 +7,17 @@ export default async function handler(req, res) {
 	let data
 	const query = req.query;
 
-	if(query.title) inputTitle = query.Title;
+	if(query.title) inputTitle = query.Title
 	if(query.genre) inputGenre = query.genre.split(' ');
 	if(query.decade) {
 		inputDecadeStart = Number(query.decade.slice(0,4));  
 		inputDecadeEnd = inputDecadeStart + 9
 	}
 
-	console.log({inputTitle, inputGenre, inputDecadeStart})
+	// console.log({inputTitle, inputGenre, inputDecadeStart})
 	
+	console.log('api', query)
+
 	/*
 	const colRef = db.collection('movies')
 

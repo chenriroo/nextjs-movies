@@ -5,16 +5,24 @@ import styles from "./MoviesFilterSide.module.css"
 const MoviesFilterText = ({name, callback, state}) => {
 	const [displayAlert, setAlert] = useState(false);
 	const [filterIsActive, setFilterActive] = useState(false)
+	const [input, setInput] = useState('');
 
 	function handleInput(e) {
-		const input = e.target.value;
-		input.length > 4 ? setFilterActive(true) : setFilterActive(false);
-		callback(input);
+		setInput(e.target.value);
+
+		if(e.target.value.length > 4) {
+			setFilterActive(true)
+			callback(e.target.value);
+		} else {
+			setFilterActive(false);
+		}
 	}
 
 	function handleButtonRemove() {
+		setInput('');
 		callback('');
 		setFilterActive(false);
+		
 	}
 
 	function handleMouseEnter() {
@@ -27,6 +35,7 @@ const MoviesFilterText = ({name, callback, state}) => {
 		setAlert(false)
 	}
 
+
 	return (
 		<div className={styles.section}>
 			<div className={styles.header}>
@@ -38,7 +47,7 @@ const MoviesFilterText = ({name, callback, state}) => {
 				type="text" 
 				className={styles.inputText} 
 				placeholder='Search title' 
-				value={state}
+				value={input}
 				onChange={handleInput}
 				/>
 				<button

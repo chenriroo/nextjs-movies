@@ -51,7 +51,7 @@ function generateAPIURL(state) {
 		url = `/api/movies`
 	}
 
-	console.log(url)
+	// console.log(url)
 
 	return url
 }
@@ -96,7 +96,7 @@ const Movies = () => {
 	// console.log({state, activeSort})
 	// console.log(searchData)
 
-	console.log(state)
+	// console.log(state)
 
 
 	function handleSortInput(button) {
@@ -122,6 +122,8 @@ const Movies = () => {
 	}
 
 	function handleSearchTitle(inputString) {
+
+		
 		dispatch({
 			type: 'title',
 			payload: {

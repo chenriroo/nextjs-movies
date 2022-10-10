@@ -38,7 +38,6 @@ function generateAPIURL(state) {
 		} else if(Array.isArray(state[key])) {
 			output = state[key].length > 1 ? state[key].map(el => el).join('+') : state[key][0]
 		}
-
 		if(output) arr.push(`${key}=${output}`)
 	})
 
@@ -50,8 +49,6 @@ function generateAPIURL(state) {
 	} else {
 		url = `/api/movies`
 	}
-
-	// console.log(url)
 
 	return url
 }
@@ -91,13 +88,12 @@ const Movies = () => {
 	const [displayCovers, setDisplayCover] = useState(true);
 	const [state, dispatch] = useReducer(reducer, initialState);
 	const [activeSort, setActiveSort] = useState('');
-	const { data: searchData, error: searchError } = useSWRInfinite(generateAPIURL(state), fetcher);
+	const { data: searchData, error: searchError } = useSWRInfinite(generateAPIURL(state), fetcher, {
+		revalidateOnFocus: false,
+		revalidateOnReconnect: false
+	});
 
-	// console.log({state, activeSort})
-	// console.log(searchData)
-
-	// console.log(state)
-
+	console.log({state, searchData,  activeSort})
 
 	function handleSortInput(button) {
 		if(activeSort === button) {
@@ -145,6 +141,23 @@ const Movies = () => {
 	// Later we should retrieve all available genres from existing movies in the database
 	const genres = ['action','animation', 'comedy','drama','fantasy','horror','romance','sciencefiction','thriller','war']
 	const decades = ['1970s','1980s','1990s','2000s','2010s','2020s']
+
+	useEffect(() => {
+
+		if(!searchData) return
+
+		if(activeSort === 'recent') {
+			console.log('sort: recent')
+			searchData.movies.sort((a,b) => a.year > b.year)
+
+		} else if (activeSort === 'top-rated') {
+			console.log('sort: top-rated')
+		} else if (activeSort === 'upcoming') {
+			console.log('sort: upcoming')
+		} else {
+			console.log('no sorting')
+		}
+	}, [activeSort, searchData])
 
 
 	return (

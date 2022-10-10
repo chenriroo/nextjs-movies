@@ -10,11 +10,12 @@ const MoviesFilterText = ({name, callback, state}) => {
 	function handleInput(e) {
 		setInput(e.target.value);
 
-		if(e.target.value.length > 4) {
+		if(e.target.value.length >= 4) {
 			setFilterActive(true)
 			callback(e.target.value);
-		} else {
+		} else if(e.target.value.length < 4 && filterIsActive === true){
 			setFilterActive(false);
+			callback('')
 		}
 	}
 

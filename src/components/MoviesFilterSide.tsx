@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Alert from "./Alert";
 import styles from "./MoviesFilterSide.module.css"
 
-const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit  }) => {
+const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit, isDisabled  }) => {
 	const [isVisible, setVisibility] = useState(false);
 	const [limitReached, setLimitReached] = useState(false);
 	const [displayLimitReached, setDisplayLimitReached] = useState(false);
@@ -60,6 +60,8 @@ const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit  })
 		}	
 	}
 
+	console.log(isDisabled)
+
 	return (
 	<div className={styles.section}>
 		<div className={ [styles.header, styles.headerClickable].join(' ') } onClick={toggleDisplay}>
@@ -78,6 +80,7 @@ const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit  })
 				id={option} 
 				onChange={handleCheckbox} 
 				checked={state.includes(option)}
+				disabled={isDisabled}
 				/>
 				<label htmlFor={option}>{option}</label>
 				{/* <span className={styles.foo}>10</span> */}
@@ -94,6 +97,7 @@ const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit  })
 				id={option} 
 				onChange={handleCheckbox} 
 				checked={state.includes(option)}
+				disabled={isDisabled}
 				/>
 				<label htmlFor={option}>{option}</label>
 				{/* <span className={styles.foo}>10</span> */}

@@ -2,7 +2,7 @@ import { database } from "firebase-admin";
 import { db } from "../../lib/firebaseAdmin"
 
 export default async function handler(req, res) {
-	let inputTitle, inputGenre, inputDecadeStart, inputDecadeEnd
+	let inputTitle, inputGenre, inputDecadeStart, inputDecadeEnd, inputSort
 	let movies = [];
 	let data
 	const query = req.query;
@@ -13,6 +13,7 @@ export default async function handler(req, res) {
 		inputDecadeStart = Number(query.decade.slice(0,4));  
 		inputDecadeEnd = inputDecadeStart + 9
 	}
+	if(query.sort) inputSort = query.sort;
 
 	// console.log({inputTitle, inputGenre, inputDecadeStart})
 	

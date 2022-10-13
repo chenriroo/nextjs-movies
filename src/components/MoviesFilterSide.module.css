@@ -72,6 +72,10 @@
 	padding: 0px 0 0px 7px;
 }
 
+.option input[type='checkbox']:disabled + label {
+	opacity: 0.5;
+}
+
 
 /* Text */
 .rowInput {

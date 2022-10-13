@@ -5,6 +5,7 @@ import TopMenu from "../../components/TopMenu"
 import MoviesSort from "../../components/MoviesSort"
 import MoviesFilterSide from "../../components/MoviesFilterSide"
 import MoviesFilterText from "../../components/MoviesFilterText"
+import MoviesResults from "../../components/MoviesResults"
 import SingleLine from "../../components/lists/SingleLine"
 import Layout from "../../components/Layout"
 import useSWRInfinite from "swr"
@@ -82,6 +83,7 @@ const initialState = {
 	title: '',
 	genre: [],
 	decade: [],
+	sort: '',
 }
 
 const Movies = () => {
@@ -95,14 +97,8 @@ const Movies = () => {
 
 	console.log({state, searchData,  activeSort})
 
-	function handleSortInput(button) {
-		if(activeSort === button) {
-			setActiveSort('')
-		} else {
-			setActiveSort(button)
-		}
-	}
 
+	// Rename... for checkbox input only
 	function handleFilters(data) {
 		let entrySanitized = data.entry;
 		if(data.type === 'decade') entrySanitized = data.entry.slice(0,4)
@@ -118,12 +114,26 @@ const Movies = () => {
 	}
 
 	function handleSearchTitle(inputString) {
-
 		
 		dispatch({
 			type: 'title',
 			payload: {
 				value: inputString
+			}
+		})
+	}
+
+	function handleSortInput(button) {
+		if(activeSort === button) {
+			setActiveSort('')
+		} else {
+			setActiveSort(button)
+		}
+
+		dispatch({
+			type: 'sort',
+			payload: {
+				value: button
 			}
 		})
 	}
@@ -137,28 +147,12 @@ const Movies = () => {
 			}
 		})
 	}
-	
+
+
+
 	// Later we should retrieve all available genres from existing movies in the database
 	const genres = ['action','animation', 'comedy','drama','fantasy','horror','romance','sciencefiction','thriller','war']
 	const decades = ['1970s','1980s','1990s','2000s','2010s','2020s']
-
-	useEffect(() => {
-
-		if(!searchData) return
-
-		if(activeSort === 'recent') {
-			console.log('sort: recent')
-			searchData.movies.sort((a,b) => a.year > b.year)
-
-		} else if (activeSort === 'top-rated') {
-			console.log('sort: top-rated')
-		} else if (activeSort === 'upcoming') {
-			console.log('sort: upcoming')
-		} else {
-			console.log('no sorting')
-		}
-	}, [activeSort, searchData])
-
 
 	return (
 		<>
@@ -204,26 +198,26 @@ const Movies = () => {
 							options={genres}
 							handleFilters={handleFilters}
 							state={state.genre}
-							activeLimit={3}/>
+							activeLimit={3}
+							isDisabled={false}/>
 						<MoviesFilterSide 
 							name='Decade' 
 							options={decades} 
 							handleFilters={handleFilters} 
 							state={state.decade} 
-							activeLimit={1} />
+							activeLimit={1} 
+							isDisabled={activeSort === 'recent' || activeSort === 'upcoming' ? true : false}/>
 					</section>
 					
 					<section id={styles.right}>
 						<div id={styles.filterTop}>
-							<MoviesSort activeSort={activeSort} callBack={handleSortInput}/>
+							<MoviesSort state={state} activeSort={activeSort} callBack={handleSortInput}/>
 						</div>
 					
 						<div id={styles.movieItems}>
-							{
-								searchData &&
-								<SingleLine data={searchData.movies} type='detail' />
 
-							}
+							<MoviesResults data={searchData} sort={activeSort} />
+
 
 						</div>
 					</section>

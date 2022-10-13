@@ -1,6 +1,6 @@
 import styles from './MoviesSort.module.css'
 
-const MoviesSort = ({activeSort, callBack}) => {
+const MoviesSort = ({state, activeSort, callBack}) => {
 
 	function buttonClick(button) {
 		callBack(button)
@@ -9,11 +9,11 @@ const MoviesSort = ({activeSort, callBack}) => {
 	return (
 		<div className={styles.container}>
 			<button
+			disabled={state.decade.length > 0 ? true : false}
 			className={`button-alt ${activeSort === 'recent' ? 'button-alt-active' : ''}`}
 			onClick={() => buttonClick('recent')}>
 				Recent
 			</button>
-
 			<button
 			className={`button-alt ${activeSort === 'top-rated' ? 'button-alt-active' : ''}`}
 			onClick={() => buttonClick('top-rated')}>
@@ -21,6 +21,7 @@ const MoviesSort = ({activeSort, callBack}) => {
 			</button>
 
 			<button
+			disabled={state.decade.length > 0 ? true : false}
 			className={`button-alt ${activeSort === 'upcoming' ? 'button-alt-active' : ''}`}
 			onClick={() => buttonClick('upcoming')}>
 				Upcoming

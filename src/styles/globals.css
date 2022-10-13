@@ -131,3 +131,12 @@ button:active {
 	border-bottom: 2px solid white;
 	border-radius: 2px 2px 0 0;
 }
+
+.button-alt:disabled {
+	opacity: 0.5;
+	cursor:default;
+}
+
+.button-alt:disabled:hover {
+	background-color: transparent;
+}

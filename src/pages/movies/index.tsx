@@ -74,6 +74,17 @@ function reducer(state, action) {
 				...state,
 				decade: arr
 			};
+		case "sort":
+			let foo
+			if(state.sort === action.payload.value) {
+				foo = ''
+			} else {
+				foo = action.payload.value
+			}
+			return {
+				...state,
+				sort: foo
+			}
 		default:
 			return state;
 	}
@@ -89,14 +100,12 @@ const initialState = {
 const Movies = () => {
 	const [displayCovers, setDisplayCover] = useState(true);
 	const [state, dispatch] = useReducer(reducer, initialState);
-	const [activeSort, setActiveSort] = useState('');
 	const { data: searchData, error: searchError } = useSWRInfinite(generateAPIURL(state), fetcher, {
 		revalidateOnFocus: false,
 		revalidateOnReconnect: false
 	});
 
-	console.log({state, searchData,  activeSort})
-
+	console.log({state, searchData})
 
 	// Rename... for checkbox input only
 	function handleFilters(data) {
@@ -124,12 +133,6 @@ const Movies = () => {
 	}
 
 	function handleSortInput(button) {
-		if(activeSort === button) {
-			setActiveSort('')
-		} else {
-			setActiveSort(button)
-		}
-
 		dispatch({
 			type: 'sort',
 			payload: {
@@ -206,17 +209,17 @@ const Movies = () => {
 							handleFilters={handleFilters} 
 							state={state.decade} 
 							activeLimit={1} 
-							isDisabled={activeSort === 'recent' || activeSort === 'upcoming' ? true : false}/>
+							isDisabled={state.sort === 'recent' || state.sort === 'upcoming' ? true : false}/>
 					</section>
 					
 					<section id={styles.right}>
 						<div id={styles.filterTop}>
-							<MoviesSort state={state} activeSort={activeSort} callBack={handleSortInput}/>
+							<MoviesSort state={state} activeSort={state.sort} callBack={handleSortInput}/>
 						</div>
 					
 						<div id={styles.movieItems}>
 
-							<MoviesResults data={searchData} sort={activeSort} />
+							<MoviesResults data={searchData} sort={state.sort} />
 
 
 						</div>

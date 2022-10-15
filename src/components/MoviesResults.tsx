@@ -10,8 +10,12 @@ const MoviesResults = ({ data, sort }) => {
 	if(!data) return <div>Nothing</div>
 	if(data.movies.length <= 0) return <div>No movies</div>
 
+	console.log(data)
 
-	/* sort in api request
+	return <SingleLine data={data.movies} type='detail' />
+
+
+	/* local sorting, instead should sort in firestore request
 	if(sort === 'recent') {
 		let foo = data.movies.slice().sort((a,b) => a.year - b.year)
 		return <SingleLine data={foo} type='detail' />

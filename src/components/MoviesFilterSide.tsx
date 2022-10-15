@@ -60,8 +60,6 @@ const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit, is
 		}	
 	}
 
-	console.log(isDisabled)
-
 	return (
 	<div className={styles.section}>
 		<div className={ [styles.header, styles.headerClickable].join(' ') } onClick={toggleDisplay}>

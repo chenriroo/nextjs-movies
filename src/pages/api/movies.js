@@ -6,20 +6,34 @@ export default async function handler(req, res) {
 	let movies = [];
 	let data
 	const query = req.query;
+	const arrQueries = []
 
-	if(query.title) inputTitle = query.Title
-	if(query.genre) inputGenre = query.genre.split(' ');
+	if(query.title) {
+		inputTitle = query.Title
+		arrQueries.push('title')
+	}
+
+	if(query.genre) {
+		inputGenre = query.genre.split(' ');
+		arrQueries.push('genre')
+	}
 	if(query.decade) {
 		inputDecadeStart = Number(query.decade.slice(0,4));  
 		inputDecadeEnd = inputDecadeStart + 9
+		arrQueries.push('decade')
 	}
-	if(query.sort) inputSort = query.sort;
+	if(query.sort) {
+		inputSort = query.sort;
+		arrQueries.push('sort')
+	}
+
+	console.log(arrQueries)
 
 	// console.log({inputTitle, inputGenre, inputDecadeStart})
 	
 	console.log('api', query)
 
-	/*
+	
 	const colRef = db.collection('movies')
 
 	if(inputTitle & inputGenre && inputDecadeStart) {
@@ -66,6 +80,11 @@ export default async function handler(req, res) {
 			.where("year", ">=", inputDecadeStart)
 			.where("year", "<=", inputDecadeEnd)
 			.get()
+	} else if(inputSort) {
+		console.log('sort')
+		data = await colRef
+			.orderBy('rating')
+			.get()
 	} else {
 		console.log('no filter')
 		data = await colRef.get()
@@ -73,11 +92,11 @@ export default async function handler(req, res) {
 
 	data.forEach(doc => movies.push({ id: doc.id , ...doc.data() }));
 
-	//console.log(movies)
+	console.log(movies)
 
 	return res.status(200).json({ movies: movies });
 
-	*/
+	
 
 
 // Start ---  return placeholder for testing without querying firestore
@@ -112,6 +131,30 @@ export default async function handler(req, res) {
 			year: '2022',
 			title: 'Toy Story 3',
 			rating: 5,
+			description: 'Woody, Buzz, and the rest of Andy’s toys haven’t been played with in years. With Andy about to go to college, the gang find themselves accidentally left at a nefarious day care center. The toys must band together to escape and return home to Andy.',
+			imgBackground: 'https://firebasestorage.googleapis.com/v0/b/nextjs-movies-3e25b.appspot.com/o/background%2Ftoystory3-bg.jpg?alt=media&token=5481316b-098b-4c33-a5ad-2d18b8d98ebf',
+			genre: [ 'comedy', 'animation' ],
+			imgPoster: 'https://firebasestorage.googleapis.com/v0/b/nextjs-movies-3e25b.appspot.com/o/poster%2Ftoy%20story%203.jpg?alt=media&token=c5a65684-f31b-4ee9-b740-459f14d48f9a',
+			tagline: 'No toy gets left behind'
+		},
+		{
+			id: 'Toy-Story-3-535',
+			imgBackgroundBlur: 'https://firebasestorage.googleapis.com/v0/b/nextjs-movies-3e25b.appspot.com/o/background%2Ftoystory3-bg-blur.jpg?alt=media&token=95ca5b79-a41b-4ec7-83e0-ec5d6fcd8630',
+			year: '2004',
+			title: 'Toy Story 3',
+			rating:6,
+			description: 'Woody, Buzz, and the rest of Andy’s toys haven’t been played with in years. With Andy about to go to college, the gang find themselves accidentally left at a nefarious day care center. The toys must band together to escape and return home to Andy.',
+			imgBackground: 'https://firebasestorage.googleapis.com/v0/b/nextjs-movies-3e25b.appspot.com/o/background%2Ftoystory3-bg.jpg?alt=media&token=5481316b-098b-4c33-a5ad-2d18b8d98ebf',
+			genre: [ 'comedy', 'animation' ],
+			imgPoster: 'https://firebasestorage.googleapis.com/v0/b/nextjs-movies-3e25b.appspot.com/o/poster%2Ftoy%20story%203.jpg?alt=media&token=c5a65684-f31b-4ee9-b740-459f14d48f9a',
+			tagline: 'No toy gets left behind'
+		},
+		{
+			id: 'Toy-Story-3-535',
+			imgBackgroundBlur: 'https://firebasestorage.googleapis.com/v0/b/nextjs-movies-3e25b.appspot.com/o/background%2Ftoystory3-bg-blur.jpg?alt=media&token=95ca5b79-a41b-4ec7-83e0-ec5d6fcd8630',
+			year: '1993',
+			title: 'Toy Story 3',
+			rating:10,
 			description: 'Woody, Buzz, and the rest of Andy’s toys haven’t been played with in years. With Andy about to go to college, the gang find themselves accidentally left at a nefarious day care center. The toys must band together to escape and return home to Andy.',
 			imgBackground: 'https://firebasestorage.googleapis.com/v0/b/nextjs-movies-3e25b.appspot.com/o/background%2Ftoystory3-bg.jpg?alt=media&token=5481316b-098b-4c33-a5ad-2d18b8d98ebf',
 			genre: [ 'comedy', 'animation' ],

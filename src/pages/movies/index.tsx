@@ -3,7 +3,7 @@ import styles from '../../styles/Movies.module.css'
 import { useState, useEffect, useReducer } from "react"
 import TopMenu from "../../components/TopMenu"
 import MoviesSort from "../../components/MoviesSort"
-import MoviesFilterSide from "../../components/MoviesFilterSide"
+import MoviesFilterCheckboxGroup from "../../components/MoviesFilterCheckboxGroup"
 import MoviesFilterText from "../../components/MoviesFilterText"
 import MoviesResults from "../../components/MoviesResults"
 import SingleLine from "../../components/lists/SingleLine"
@@ -157,6 +157,8 @@ const Movies = () => {
 	const genres = ['action','animation', 'comedy','drama','fantasy','horror','romance','sciencefiction','thriller','war']
 	const decades = ['1970s','1980s','1990s','2000s','2010s','2020s']
 
+	console.log(state)
+
 	return (
 		<>
 			<Head>
@@ -195,21 +197,28 @@ const Movies = () => {
 						<MoviesFilterText 
 							name='Title' 
 							callback={handleSearchTitle} 
-							state={state.title}/>
-						<MoviesFilterSide
+							state={state.title}
+							isDisabled={state.decade.length > 0 || state.genre.length > 0 ? true : false}
+							/>
+						<MoviesFilterCheckboxGroup
 							name='Genre'
 							options={genres}
 							handleFilters={handleFilters}
 							state={state.genre}
 							activeLimit={3}
-							isDisabled={false}/>
-						<MoviesFilterSide 
+							isDisabled={state.title !== '' ? true : false}/>
+						<MoviesFilterCheckboxGroup 
 							name='Decade' 
 							options={decades} 
 							handleFilters={handleFilters} 
 							state={state.decade} 
 							activeLimit={1} 
-							isDisabled={state.sort === 'recent' || state.sort === 'upcoming' ? true : false}/>
+							isDisabled={
+								state.sort === 'recent' || 
+								state.sort === 'upcoming' ||
+								state.title !== '' ? true : false
+								}
+							/>
 					</section>
 					
 					<section id={styles.right}>

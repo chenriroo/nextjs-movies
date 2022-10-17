@@ -6,64 +6,80 @@ export default async function handler(req, res) {
 	let movies = [];
 	let data
 	const query = req.query;
-	const arrQueries = []
+	const colRef = db.collection('movies')
+	const conditions = []
 
 	if(query.title) {
 		inputTitle = query.Title
-		arrQueries.push('title')
 	}
 
 	if(query.genre) {
 		inputGenre = query.genre.split(' ');
-		arrQueries.push('genre')
 	}
 	if(query.decade) {
 		inputDecadeStart = Number(query.decade.slice(0,4));  
 		inputDecadeEnd = inputDecadeStart + 9
-		arrQueries.push('decade')
 	}
 	if(query.sort) {
 		inputSort = query.sort;
-		arrQueries.push('sort')
 	}
 
-	console.log(arrQueries)
 
 	// console.log({inputTitle, inputGenre, inputDecadeStart})
 	
 	console.log('api', query)
 
-	
-	const colRef = db.collection('movies')
 
-	if(inputTitle & inputGenre && inputDecadeStart) {
-		console.log('title + genre + decade')
+	// START - testing conditional query array - might not work in nodeJS
+	// Use conditional to push queries into array
+	// Run query by calling this array
+
+	// if(inputTitle) conditions.push(where("titleTags", "array-contains-any", inputTitle))
+	// if(inputDecadeStart) conditions.push(where("year", ">=", inputDecadeStart), where("year", "<=", inputDecadeEnd))
+	// if(inputGenre) conditions.push(where("genre", "array-contains-any", inputGenre))
+	// if(inputSort) conditions.push(orderBy('rating'))
+
+	// END - testing conditional query array
+
+
+	// Conditional method can get very complex
+
+
+	/*
+	if(inputGenre && inputDecadeStart && inputSort) {
+		console.log('genre + decade + sort')
 		data = await colRef
-			.where("titleTags", "array-contains-any", inputTitle)
 			.where("genre", "array-contains-any", inputGenre)
 			.where("year", ">=", inputDecadeStart)
 			.where("year", "<=", inputDecadeEnd)
-			.get()
-	} else if(inputTitle && inputGenre) {
-		console.log('title + genre')
-		data = await colRef
-			.where("titleTags", "array-contains-any", inputTitle)
-			.where("genre", "array-contains-any", inputGenre)
-			get()
-	} else if(inputTitle && inputDecadeStart) {
-		console.log('title + decade')
-		data = await colRef
-			.where("titleTags", "array-contains-any", inputTitle)
-			.where("year", ">=", inputDecadeStart)
-			.where("year", "<=", inputDecadeEnd)
+			.orderBy('rating')
 			.get()
 	} else if(inputGenre && inputDecadeStart) {
-		console.log('genre + decade')
+			console.log('genre + decade')
+			data = await colRef
+				.where("genre", "array-contains-any", inputGenre)
+				.where("year", ">=", inputDecadeStart)
+				.where("year", "<=", inputDecadeEnd)
+				.get()
+	} else if(inputGenre && inputSort) {
+			console.log('genre + sort')
+			data = await colRef
+				.where("genre", "array-contains-any", inputGenre)
+				.orderBy('rating')
+				.get()
+	} else if(inputDecadeStart && inputSort) {
+			console.log('decade + sort')
+			data = await colRef
+				.where("year", ">=", inputDecadeStart)
+				.where("year", "<=", inputDecadeEnd)
+				.orderBy('rating')
+				.get()
+	} else if(inputTitle && inputSort) {
+		console.log('title + sort')
 		data = await colRef
-			.where("genre", "array-contains-any", inputGenre)
-			.where("year", ">=", inputDecadeStart)
-			.where("year", "<=", inputDecadeEnd)
-			.get()
+			.where("titleTags", "array-contains-any", inputTitle)
+			.orderBy('rating')
+			get()
 	} else if(inputTitle) {
 		console.log('title')
 		data = await colRef
@@ -96,6 +112,7 @@ export default async function handler(req, res) {
 
 	return res.status(200).json({ movies: movies });
 
+	*/
 	
 
 

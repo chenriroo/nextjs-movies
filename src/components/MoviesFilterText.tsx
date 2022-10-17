@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import Alert from "./Alert"
-import styles from "./MoviesFilterSide.module.css"
+import styles from "./MoviesFilterCheckboxGroup.module.css"
 
-const MoviesFilterText = ({name, callback, state}) => {
+const MoviesFilterText = ({name, callback, state, isDisabled}) => {
 	const [displayAlert, setAlert] = useState(false);
 	const [filterIsActive, setFilterActive] = useState(false)
 	const [input, setInput] = useState('');
@@ -50,6 +50,7 @@ const MoviesFilterText = ({name, callback, state}) => {
 				placeholder='Search title' 
 				value={input}
 				onChange={handleInput}
+				disabled={isDisabled}
 				/>
 				<button
 				onClick={handleButtonRemove}
@@ -64,7 +65,7 @@ const MoviesFilterText = ({name, callback, state}) => {
 				}
 				</button>
 				{displayAlert && <Alert 
-				text={`4 characters minimum`}
+				text={isDisabled ? `Inactive when filtering decade/genre` : `4 characters minimum`}
 				type='popup' />}
 
 			</div>

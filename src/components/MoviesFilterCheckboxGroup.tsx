@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import Alert from "./Alert";
-import styles from "./MoviesFilterSide.module.css"
+import styles from "./MoviesFilterCheckboxGroup.module.css"
 
-const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit, isDisabled  }) => {
+const MoviesFilterCheckboxGroup = ({ name, options, handleFilters, state, activeLimit, isDisabled  }) => {
 	const [isVisible, setVisibility] = useState(false);
 	const [limitReached, setLimitReached] = useState(false);
 	const [displayLimitReached, setDisplayLimitReached] = useState(false);
@@ -106,4 +106,4 @@ const MoviesFilterSide = ({ name, options, handleFilters, state, activeLimit, is
 	)
 }
 
-export default MoviesFilterSide
+export default MoviesFilterCheckboxGroup

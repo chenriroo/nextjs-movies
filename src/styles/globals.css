@@ -80,6 +80,8 @@ input[type="submit"]:focus {
 	outline: 2px solid rgba(255, 255, 255, 0.8);
 }
 
+input[type="text"]:disabled ~ button { opacity: 0.7;  }
+input[type="text"]:disabled { opacity: 0.4; }
 
 textarea,
 select {

@@ -198,7 +198,10 @@ const Movies = () => {
 							name='Title' 
 							callback={handleSearchTitle} 
 							state={state.title}
-							isDisabled={state.decade.length > 0 || state.genre.length > 0 ? true : false}
+							isDisabled={
+								state.decade.length > 0 || 
+								state.genre.length > 0 || 
+								state.sort !== '' ? true : false}
 							/>
 						<MoviesFilterCheckboxGroup
 							name='Genre'

@@ -1,7 +1,6 @@
 import { getApps, initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-import { getAuth } from "firebase/auth"
 
 // these can be public, used environment variables just because
 const firebaseConfig = {
@@ -21,7 +20,6 @@ if(!getApps.length) {
 
 	projectFirestore = getFirestore(app);
 	projectStorage = getStorage()
-	projectAuth = getAuth(app)
 }
 
 export { projectFirestore, projectStorage, projectAuth }

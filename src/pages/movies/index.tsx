@@ -203,7 +203,7 @@ const Movies = () => {
 						</div>
 						
 						<MoviesFilterText 
-							name='Title' 
+							name='Title'  
 							callback={handleSearchTitle} 
 							state={state.title}
 							isDisabled={

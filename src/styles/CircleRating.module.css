@@ -1,0 +1,47 @@
+.circleOuter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	background-color: #ffffff;
+}
+
+.circleBar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 74px;
+	height: 74px;
+	border-radius: 50%;
+	z-index: 5;
+	background-color: rgb(220, 220, 220);
+
+}
+
+.circleRating {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 74px;
+	height: 74px;
+	border-radius: 50%;
+	z-index: 10;
+}
+
+.circleInner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background-color: #ffffff;
+	z-index: 10;
+}
+
+.average {
+	font-size: 2em;
+	color: #031023;
+}

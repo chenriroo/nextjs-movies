@@ -1,0 +1,17 @@
+.rating {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.slider {
+	flex: 0 0 200px;
+	padding: 5px 10px;
+	background-color: red;
+}
+
+.slider > input[type="range"] {
+	width: 100%;
+	
+}

@@ -1,0 +1,44 @@
+@keyframes fadeIn {
+	0% { opacity: 0;  }
+	100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+	0% { opacity: 1; }
+	100% { opacity: 0; }
+}
+
+@keyframes slideIn {
+	0% { width: 0%; opacity:0; }
+	10% { width: 100%; opacity: 1; }
+	90% { width: 100%; opacity: 1; }
+	95% { opacity: 0.5 }
+	100% { width: 0%; opacity: 0; }
+}
+
+.alert {
+	display: inline-block;
+	position: absolute;
+    font-size: 14px;
+    padding: 2px 8px;
+	border-radius: 2px;
+	background-color: #e9dbc2;
+    color: #ab7207;
+	
+}
+
+.alert > span {
+	animation: fadeIn 0.3s;
+	white-space: nowrap;
+}
+
+.cover {
+	opacity: 0;
+	width: 0%;
+	animation: slideIn 2s;
+}
+
+.popup {
+	top: -20px;
+	animation: fadeIn 0.3s;
+}

@@ -1,0 +1,29 @@
+.container {
+	display: flex;
+	flex-flow: column;
+}
+
+.container textarea {
+	height: 50px;
+	width: 100%;
+	transition: height 200ms ease-in;
+	resize: none;
+}
+
+.container textarea:focus {
+	height: 200px;
+}
+
+.container button {
+	width: 80px;
+}
+
+.top {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 0;
+}
+
+.topOptions {
+	position: relative;
+}

@@ -1,0 +1,9 @@
+.container {
+	display: flex;
+	flex-flow:column;
+}
+
+.block {
+	flex: 1 0 100px;
+	border: 1px solid red;
+}

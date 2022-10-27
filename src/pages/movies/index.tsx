@@ -8,7 +8,7 @@ import MoviesFilterText from "../../components/MoviesFilterText"
 import MoviesResults from "../../components/MoviesResults"
 import SingleLine from "../../components/lists/SingleLine"
 import Layout from "../../components/Layout"
-import useSWRInfinite from "swr"
+import useSWR from "swr"
 import InfoButton from "../../components/InfoButton"
 import { takeCoverage } from "v8"
 import { off } from "process"
@@ -27,7 +27,7 @@ function helperReducer(arrState, action) {
 		return arr 
 }
 
-function generateAPIURL(state) {
+function generateAPIURL(state,pageIndex) {
 	let urlGenre, urlDecade, url
 	const keys = Object.keys(state)
 	let arr = []
@@ -44,12 +44,16 @@ function generateAPIURL(state) {
 
 	if(arr.length > 1) {
 		let foo = arr.map((el) => el).join('&')
-		url = `/api/movies?${foo}`
+		url = `/api/movies?${foo}&page=${pageIndex}`
 	} else if(arr.length === 1) {
-		url = `/api/movies?${arr[0]}`
+		url = `/api/movies?${arr[0]}&page=${pageIndex}`
 	} else {
-		url = `/api/movies`
+		url = `/api/movies?page=${pageIndex}`
 	}
+
+
+
+	console.log(url)
 
 	return url
 }
@@ -84,7 +88,7 @@ function reducer(state, action) {
 			return {
 				...state,
 				sort: foo
-			}
+			};
 		default:
 			return state;
 	}
@@ -98,14 +102,18 @@ const initialState = {
 }
 
 const Movies = () => {
+	const [pageIndex, setPageIndex] = useState(0);
 	const [displayCovers, setDisplayCover] = useState(true);
 	const [state, dispatch] = useReducer(reducer, initialState);
-	const { data: searchData, error: searchError } = useSWRInfinite(generateAPIURL(state), fetcher, {
+	const { data: searchData, error: searchError } = useSWR(`${generateAPIURL(state, pageIndex)}`, fetcher, {
 		revalidateOnFocus: false,
 		revalidateOnReconnect: false
 	});
 
-	console.log({state, searchData})
+
+	console.log(searchData)
+
+	//console.log({state, searchData})
 
 	// Rename... for checkbox input only
 	function handleFilters(data) {
@@ -141,6 +149,10 @@ const Movies = () => {
 		})
 	}
 
+	function loadMoreData() {
+		setPageIndex(pageIndex + 1)
+	}
+
 	function deleteFilter(tag,type) {
 		dispatch({
 			type: type,
@@ -151,13 +163,9 @@ const Movies = () => {
 		})
 	}
 
-
-
 	// Later we should retrieve all available genres from existing movies in the database
 	const genres = ['action','animation', 'comedy','drama','fantasy','horror','romance','sciencefiction','thriller','war']
 	const decades = ['1970s','1980s','1990s','2000s','2010s','2020s']
-
-	console.log(state)
 
 	return (
 		<>
@@ -231,9 +239,8 @@ const Movies = () => {
 					
 						<div id={styles.movieItems}>
 
-							<MoviesResults data={searchData} sort={state.sort} />
-
-
+							<MoviesResults index={pageIndex} data={searchData} sort={state.sort} />
+							<button onClick={loadMoreData}>More</button>
 						</div>
 					</section>
 

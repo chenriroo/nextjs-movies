@@ -1,6 +1,7 @@
 import { getApps, initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { getAuth } from "firebase/auth"
 
 // these can be public, used environment variables just because
 const firebaseConfig = {
@@ -13,16 +14,17 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID
  };
 
-let app, projectFirestore, projectStorage
+let app, projectFirestore, projectStorage, projectAuth
 
 if(!getApps.length) {
 	app = initializeApp(firebaseConfig)
 
 	projectFirestore = getFirestore(app);
 	projectStorage = getStorage()
+	projectAuth = getAuth(app)
 }
 
-export { projectFirestore, projectStorage }
+export { projectFirestore, projectStorage, projectAuth }
 
 
 

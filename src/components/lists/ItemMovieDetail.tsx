@@ -15,20 +15,23 @@ const ItemMovieDetail = ({data}) => {
 
 	function Hover() {
 		setHovered(true);
-		const el = refElementDescription.current;
-		const height = el.clientHeight;
+		setTimeout(() => {
+			const el = refElementDescription.current;
+			const height = el.clientHeight;
+			console.log(el,height)
 
-		if(height > 110) {
-			setSpringDescription.start({
-				from: { y:0 },
-				to: { y: 0-height+100 },
-				loop: { reverse: true },
-				delay: 2000,
-				config: {
-					duration: 3000,
-				}
-			})
-		}
+			if(height > 100) {
+				setSpringDescription.start({
+					from: { y:0 },
+					to: { y: 0-height+100 },
+					loop: { reverse: true },
+					delay: 2000,
+					config: {
+						duration: 3000,
+					}
+				})
+			}
+		}, 300);
 	}
 
 	function unHover() {

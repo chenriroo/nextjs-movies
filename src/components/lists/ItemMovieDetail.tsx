@@ -8,7 +8,7 @@ import Link from 'next/link'
 const ItemMovieDetail = ({data}) => {
 	const [isHovered, setHovered] = useState(false)
 	const dataDescription = data.description;
-	const refElementDescription = useRef();
+	const refElementDescription = useRef(null);
 	const [springDescription, setSpringDescription] = useSpring(() => ({
 		 y: 0,
 	 }))
